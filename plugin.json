@@ -1,0 +1,21 @@
+{
+    "id": "conan-settings-editor",
+    "name": "Conan Settings Editor",
+    "author": "dtektion",
+    "version": "0.4.5",
+    "description": "Schema-driven Conan Exiles Enhanced settings, mod load order, and Workshop pak install for Pelican.",
+    "category": "plugin",
+    "url": "https://github.com/DTEKTED/conan-exiles-pelican-plugin",
+    "update_url": null,
+    "namespace": "Dtektion\\ConanSettingsEditor",
+    "class": "ConanSettingsEditorPlugin",
+    "panels": [
+        "server"
+    ],
+    "panel_version": null,
+    "composer_packages": null,
+    "meta": {
+        "status": "enabled",
+        "status_message": null
+    }
+}

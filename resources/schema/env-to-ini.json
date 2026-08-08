@@ -1,0 +1,1882 @@
+{
+  "ACTIVE_HUNGER": {
+    "file": "ServerSettings.ini",
+    "group": "Player Survival",
+    "ini_key": "PlayerActiveHungerMultiplier",
+    "ini_style": "float",
+    "section": "ServerSettings",
+    "type": "float"
+  },
+  "ACTIVE_THIRST": {
+    "file": "ServerSettings.ini",
+    "group": "Player Survival",
+    "ini_key": "PlayerActiveThirstMultiplier",
+    "ini_style": "float",
+    "section": "ServerSettings",
+    "type": "float"
+  },
+  "ADMIN_PASSWORD": {
+    "file": "ServerSettings.ini",
+    "group": "Access and Security",
+    "ini_key": "AdminPassword",
+    "ini_style": "string",
+    "section": "ServerSettings",
+    "type": "password"
+  },
+  "ALLOWED_DISTANCE_UNDERMESH": {
+    "file": "ServerSettings.ini",
+    "group": "Network and Performance",
+    "ini_key": "AllowedDistanceUndermeshSquared",
+    "ini_style": "float",
+    "section": "ServerSettings",
+    "type": "float"
+  },
+  "ALLOWED_TIME_UNDERMESH": {
+    "file": "ServerSettings.ini",
+    "group": "Network and Performance",
+    "ini_key": "AllowedTimeUndermesh",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "ALLOW_FAMILY_SHARE": {
+    "file": "ServerSettings.ini",
+    "group": "Access and Security",
+    "ini_key": "AllowFamilySharedAccount",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "AMBIENT_LIFE": {
+    "file": "ServerSettings.ini",
+    "group": "Day Night and World",
+    "ini_key": "AmbientLifeEnabled",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "ANIMAL_PEN_CRAFT_TIME": {
+    "file": "ServerSettings.ini",
+    "group": "Harvest and Crafting",
+    "ini_key": "AnimalPenCraftingTimeMultiplier",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "AVATARS_DISABLED": {
+    "file": "ServerSettings.ini",
+    "group": "Avatars",
+    "ini_key": "AvatarsDisabled",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "AVATAR_DOME_DAMAGE": {
+    "file": "ServerSettings.ini",
+    "group": "Avatars",
+    "ini_key": "AvatarDomeDamageMultiplier",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "AVATAR_DOME_DURATION": {
+    "file": "ServerSettings.ini",
+    "group": "Avatars",
+    "ini_key": "AvatarDomeDurationMultiplier",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "AVATAR_LIFETIME": {
+    "file": "ServerSettings.ini",
+    "group": "Avatars",
+    "ini_key": "AvatarLifetime",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "AVATAR_SUMMON_TIME": {
+    "file": "ServerSettings.ini",
+    "group": "Avatars",
+    "ini_key": "AvatarSummonTime",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "AVATAR_WEEKDAY_END": {
+    "file": "ServerSettings.ini",
+    "group": "Avatars",
+    "ini_key": "AvatarSummoningTimeWeekdayEnd",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "AVATAR_WEEKDAY_START": {
+    "file": "ServerSettings.ini",
+    "group": "Avatars",
+    "ini_key": "AvatarSummoningTimeWeekdayStart",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "AVATAR_WEEKEND_END": {
+    "file": "ServerSettings.ini",
+    "group": "Avatars",
+    "ini_key": "AvatarSummoningTimeWeekendEnd",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "AVATAR_WEEKEND_START": {
+    "file": "ServerSettings.ini",
+    "group": "Avatars",
+    "ini_key": "AvatarSummoningTimeWeekendStart",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "BATTLEYE_ENABLED": {
+    "file": "ServerSettings.ini",
+    "group": "Access and Security",
+    "ini_key": "IsBattlEyeEnabled",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "BUILDING_DAMAGE": {
+    "file": "ServerSettings.ini",
+    "group": "Combat and Damage",
+    "ini_key": "BuildingDamageMultiplier",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "BUILDING_DECAY_MULTIPLIER": {
+    "file": "ServerSettings.ini",
+    "group": "Building and Land Claim",
+    "ini_key": "BuildingDecayTimeMultiplier",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "BUILDING_DECAY_PER_SCORE": {
+    "file": "ServerSettings.ini",
+    "group": "Building and Land Claim",
+    "ini_key": "BuildingDecayTimePerScore",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "BUILDING_PICKUP": {
+    "file": "ServerSettings.ini",
+    "group": "Building and Land Claim",
+    "ini_key": "BuildingPickupEnabled",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "BUILDING_PRELOAD_RADIUS": {
+    "file": "ServerSettings.ini",
+    "group": "Building and Land Claim",
+    "ini_key": "BuildingPreloadRadius",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "BUILDING_VALIDATION": {
+    "file": "ServerSettings.ini",
+    "group": "Building and Land Claim",
+    "ini_key": "BuildingValidationEnabled",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "BUILD_ANYWHERE": {
+    "file": "ServerSettings.ini",
+    "group": "Building and Land Claim",
+    "ini_key": "AllowBuildingAnywhere",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "CAMPS_IGNORE_LANDCLAIM": {
+    "file": "ServerSettings.ini",
+    "group": "Building and Land Claim",
+    "ini_key": "CampsIgnoreLandclaim",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "CAN_DAMAGE_OWN_STRUCTURES": {
+    "file": "ServerSettings.ini",
+    "group": "Combat and Damage",
+    "ini_key": "CanDamagePlayerOwnedStructures",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "CAP_CHARACTER_LAYOUT": {
+    "file": "ServerSettings.ini",
+    "group": "Advanced Present Only",
+    "ini_key": "CapCharacterLayoutScalarParams",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "CHAT_HAS_GLOBAL": {
+    "file": "ServerSettings.ini",
+    "group": "Chat and Social",
+    "ini_key": "ChatHasGlobal",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "CHAT_LOCAL_RADIUS": {
+    "file": "ServerSettings.ini",
+    "group": "Chat and Social",
+    "ini_key": "ChatLocalRadius",
+    "ini_style": "float",
+    "section": "ServerSettings",
+    "type": "float"
+  },
+  "CHAT_MAX_LENGTH": {
+    "file": "ServerSettings.ini",
+    "group": "Chat and Social",
+    "ini_key": "ChatMaxMessageLength",
+    "ini_style": "string",
+    "section": "ServerSettings",
+    "type": "text"
+  },
+  "CLAMP_BUILDING_DAMAGE": {
+    "file": "ServerSettings.ini",
+    "group": "Combat and Damage",
+    "ini_key": "ClampBuildingDamageToResources",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "CLAN_MAX_SIZE": {
+    "file": "ServerSettings.ini",
+    "group": "Chat and Social",
+    "ini_key": "clanMaxSize",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "COMBAT_MODE_MODIFIER": {
+    "file": "ServerSettings.ini",
+    "group": "Combat Mode",
+    "ini_key": "CombatModeModifier",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "CONSCIOUSNESS_DAMAGE": {
+    "file": "ServerSettings.ini",
+    "group": "Combat and Damage",
+    "ini_key": "ConciousnessDamageMultiplier",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "CONTAINERS_IGNORE_OWNERSHIP": {
+    "file": "ServerSettings.ini",
+    "group": "Advanced Present Only",
+    "ini_key": "ContainersIgnoreOwnership",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "CORPSES_PER_PLAYER": {
+    "file": "ServerSettings.ini",
+    "group": "Death and Loot",
+    "ini_key": "CorpsesPerPlayer",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "CRAFTING_COST": {
+    "file": "ServerSettings.ini",
+    "group": "Harvest and Crafting",
+    "ini_key": "CraftingCostMultiplier",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "CRAFTING_SPEED": {
+    "file": "ServerSettings.ini",
+    "group": "Harvest and Crafting",
+    "ini_key": "CraftingSpeedMultiplier",
+    "ini_style": "float",
+    "section": "ServerSettings",
+    "type": "float"
+  },
+  "CREATIVE_MODE": {
+    "file": "ServerSettings.ini",
+    "group": "Access and Security",
+    "ini_key": "CreativeModeServer",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "CROSS_DESERT_ONCE": {
+    "file": "ServerSettings.ini",
+    "group": "Advanced Present Only",
+    "ini_key": "CrossDesertOnce",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "DAMAGE_COOLDOWN_RESCUE": {
+    "file": "ServerSettings.ini",
+    "group": "Combat and Damage",
+    "ini_key": "DamageCooldownBeforeRescue",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "DAWN_DUSK_SPEED": {
+    "file": "ServerSettings.ini",
+    "group": "Day Night and World",
+    "ini_key": "DawnDuskSpeedScale",
+    "ini_style": "float",
+    "section": "ServerSettings",
+    "type": "float"
+  },
+  "DAYTIME_SPEED": {
+    "file": "ServerSettings.ini",
+    "group": "Day Night and World",
+    "ini_key": "DayTimeSpeedScale",
+    "ini_style": "float",
+    "section": "ServerSettings",
+    "type": "float"
+  },
+  "DAY_CYCLE_SPEED": {
+    "file": "ServerSettings.ini",
+    "group": "Day Night and World",
+    "ini_key": "DayCycleSpeedScale",
+    "ini_style": "float",
+    "section": "ServerSettings",
+    "type": "float"
+  },
+  "DECAY_BONUS_TIME_RATE": {
+    "file": "ServerSettings.ini",
+    "group": "Building and Land Claim",
+    "ini_key": "DecayBonusTimeRate",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "DECAY_CLEANUP_MULTIPLIER": {
+    "file": "ServerSettings.ini",
+    "group": "Building and Land Claim",
+    "ini_key": "DecayCleanupTimeMultiplier",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "DECAY_SHOW_SCORE": {
+    "file": "ServerSettings.ini",
+    "group": "Building and Land Claim",
+    "ini_key": "DecayShowBuildingScore",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "DISABLE_BUILDING_DECAY": {
+    "file": "ServerSettings.ini",
+    "group": "Building and Land Claim",
+    "ini_key": "DisableBuildingAbandonment",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "DISABLE_BUILDING_DURING_PVP": {
+    "file": "ServerSettings.ini",
+    "group": "Building and Land Claim",
+    "ini_key": "DisableBuildingDuringTimeRestrictedPVP",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "DISABLE_CHAT_FORMATTING": {
+    "file": "ServerSettings.ini",
+    "group": "Chat and Social",
+    "ini_key": "DisableChatFormatting",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "DISABLE_LANDCLAIM_NOTIFICATIONS": {
+    "file": "ServerSettings.ini",
+    "group": "Building and Land Claim",
+    "ini_key": "DisableLandclaimNotifications",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "DISABLE_THRALL_DECAY": {
+    "file": "ServerSettings.ini",
+    "group": "Building and Land Claim",
+    "ini_key": "DisableThrallDecay",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "DISCONNECTION_GRACE_TIME": {
+    "file": "ServerSettings.ini",
+    "group": "Network and Performance",
+    "ini_key": "DisconnectionGraceTime",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "DOGS_SPAWN_WITH_DOGS": {
+    "file": "ServerSettings.ini",
+    "group": "Advanced Present Only",
+    "ini_key": "DogsOfTheDesertSpawnWithDogs",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "DROP_BACKPACK_ON_DEATH": {
+    "file": "ServerSettings.ini",
+    "group": "Death and Loot",
+    "ini_key": "DropBackpackOnDeath",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "DROP_EQUIPMENT_ON_DEATH": {
+    "file": "ServerSettings.ini",
+    "group": "Death and Loot",
+    "ini_key": "DropEquipmentOnDeath",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "DROP_SHORTCUTBAR_ON_DEATH": {
+    "file": "ServerSettings.ini",
+    "group": "Death and Loot",
+    "ini_key": "DropShortcutbarOnDeath",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "DURABILITY": {
+    "file": "ServerSettings.ini",
+    "group": "Harvest and Crafting",
+    "ini_key": "DurabilityMultiplier",
+    "ini_style": "float",
+    "section": "ServerSettings",
+    "type": "float"
+  },
+  "DYNAMIC_BUILDING_DAMAGE": {
+    "file": "ServerSettings.ini",
+    "group": "Combat and Damage",
+    "ini_key": "DynamicBuildingDamage",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "DYNAMIC_BUILDING_DAMAGE_PERIOD": {
+    "file": "ServerSettings.ini",
+    "group": "Combat and Damage",
+    "ini_key": "DynamicBuildingDamagePeriod",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "ENABLE_CLAN_MARKERS": {
+    "file": "ServerSettings.ini",
+    "group": "Chat and Social",
+    "ini_key": "EnableClanMarkers",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "ENABLE_FATALITIES": {
+    "file": "ServerSettings.ini",
+    "group": "Combat and Damage",
+    "ini_key": "EnableFatalities",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "ENABLE_FOLLOWER_DBNO": {
+    "file": "ServerSettings.ini",
+    "group": "Thralls and Followers",
+    "ini_key": "EnableFollowerDbno",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "ENABLE_FOLLOWER_RESCUE": {
+    "file": "ServerSettings.ini",
+    "group": "Building and Land Claim",
+    "ini_key": "EnableFollowerRescueOnLandClaimOnly",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "ENABLE_LOGIN_QUEUE": {
+    "file": "ServerSettings.ini",
+    "group": "Network and Performance",
+    "ini_key": "EnableLoginQueue",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "ENABLE_TARGET_LOCK": {
+    "file": "ServerSettings.ini",
+    "group": "Combat and Damage",
+    "ini_key": "EnableTargetLock",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "EVENT_LOG_PVE_PRIVACY": {
+    "file": "ServerSettings.ini",
+    "group": "Access and Security",
+    "ini_key": "EventLogPvECauserPrivacy",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "EVENT_LOG_PVP_PRIVACY": {
+    "file": "ServerSettings.ini",
+    "group": "Access and Security",
+    "ini_key": "EventLogPvPCauserPrivacy",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "EVENT_SYSTEM": {
+    "file": "ServerSettings.ini",
+    "group": "Advanced Present Only",
+    "ini_key": "EventSystemEnabled",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "EVERYBODY_LOOT_CORPSE": {
+    "file": "ServerSettings.ini",
+    "group": "Death and Loot",
+    "ini_key": "EverybodyCanLootCorpse",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "EXCLUSIVE_DIET": {
+    "file": "ServerSettings.ini",
+    "group": "Thralls and Followers",
+    "ini_key": "ExclusiveDiet",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "FEED_BOX_RANGE": {
+    "file": "ServerSettings.ini",
+    "group": "Thralls and Followers",
+    "ini_key": "FeedBoxRangeMultiplier",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "FOLLOWER_RESCUE_COOLDOWN": {
+    "file": "ServerSettings.ini",
+    "group": "Thralls and Followers",
+    "ini_key": "FollowerRescueCooldown",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "FOLLOWER_RESCUE_EXCLUSION": {
+    "file": "ServerSettings.ini",
+    "group": "Building and Land Claim",
+    "ini_key": "EnableFollowerRescueInBuildExclusionZone",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "FRIENDLY_FIRE_DAMAGE": {
+    "file": "ServerSettings.ini",
+    "group": "Combat and Damage",
+    "ini_key": "FriendlyFireDamageMultiplier",
+    "ini_style": "float",
+    "section": "ServerSettings",
+    "type": "float"
+  },
+  "FUEL_BURN_TIME": {
+    "file": "ServerSettings.ini",
+    "group": "Harvest and Crafting",
+    "ini_key": "FuelBurnTimeMultiplier",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "HARVEST_AMOUNT": {
+    "file": "ServerSettings.ini",
+    "group": "Harvest and Crafting",
+    "ini_key": "HarvestAmountMultiplier",
+    "ini_style": "float",
+    "section": "ServerSettings",
+    "type": "float"
+  },
+  "HEALTHBAR_DISTANCE": {
+    "file": "ServerSettings.ini",
+    "group": "Advanced Present Only",
+    "ini_key": "HealthbarVisibilityDistance",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "HEALTH_REGEN_SPEED": {
+    "file": "ServerSettings.ini",
+    "group": "Player Survival",
+    "ini_key": "PlayerHealthRegenSpeedScale",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "HUNGER_SYSTEM_PETS": {
+    "file": "ServerSettings.ini",
+    "group": "Player Survival",
+    "ini_key": "EnableHungerSystemPets",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "HUNGER_SYSTEM_THRALLS": {
+    "file": "ServerSettings.ini",
+    "group": "Player Survival",
+    "ini_key": "EnableHungerSystemThralls",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "IDLE_HUNGER": {
+    "file": "ServerSettings.ini",
+    "group": "Player Survival",
+    "ini_key": "PlayerIdleHungerMultiplier",
+    "ini_style": "float",
+    "section": "ServerSettings",
+    "type": "float"
+  },
+  "IDLE_THIRST": {
+    "file": "ServerSettings.ini",
+    "group": "Player Survival",
+    "ini_key": "PlayerIdleThirstMultiplier",
+    "ini_style": "float",
+    "section": "ServerSettings",
+    "type": "float"
+  },
+  "ITEM_CONVERSION": {
+    "file": "ServerSettings.ini",
+    "group": "Harvest and Crafting",
+    "ini_key": "ItemConvertionMultiplier",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "ITEM_REPAIR_LOSS_BY_TIER": {
+    "file": "ServerSettings.ini",
+    "group": "Harvest and Crafting",
+    "ini_key": "ItemRepairDurabilityLossByRepairkitTier",
+    "ini_style": "string",
+    "section": "ServerSettings",
+    "type": "string"
+  },
+  "ITEM_REPAIR_MIN_DURABILITY": {
+    "file": "ServerSettings.ini",
+    "group": "Harvest and Crafting",
+    "ini_key": "ItemRepairMinimumDurability",
+    "ini_style": "float",
+    "section": "ServerSettings",
+    "type": "float"
+  },
+  "ITEM_REPAIR_PENALTY_CHANCE": {
+    "file": "ServerSettings.ini",
+    "group": "Harvest and Crafting",
+    "ini_key": "ItemRepairDurabilityLossPenaltyChance",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "ITEM_SPOIL_RATE": {
+    "file": "ServerSettings.ini",
+    "group": "Harvest and Crafting",
+    "ini_key": "ItemSpoilRateScale",
+    "ini_style": "float",
+    "section": "ServerSettings",
+    "type": "float"
+  },
+  "KICK_AFK_PERCENTAGE": {
+    "file": "ServerSettings.ini",
+    "group": "Network and Performance",
+    "ini_key": "KickAFKPercentage",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "KICK_AFK_TIME": {
+    "file": "ServerSettings.ini",
+    "group": "Network and Performance",
+    "ini_key": "KickAFKTime",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "LAND_CLAIM_RADIUS": {
+    "file": "ServerSettings.ini",
+    "group": "Building and Land Claim",
+    "ini_key": "LandClaimRadiusMultiplier",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "LOGOUT_REMAIN": {
+    "file": "ServerSettings.ini",
+    "group": "Day Night and World",
+    "ini_key": "LogoutCharactersRemainInTheWorld",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "MAX_AGGRO_RANGE": {
+    "file": "ServerSettings.ini",
+    "group": "Advanced Present Only",
+    "ini_key": "MaxAggroRange",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "MAX_ALLOWED_PING": {
+    "file": "ServerSettings.ini",
+    "group": "Network and Performance",
+    "ini_key": "MaxAllowedPing",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "MAX_BUILDING_DECAY_TIME": {
+    "file": "ServerSettings.ini",
+    "group": "Building and Land Claim",
+    "ini_key": "MaxBuildingDecayTime",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "MAX_CLIENT_RATE": {
+    "file": "Engine.ini",
+    "group": "Engine",
+    "ini_key": "MaxInternetClientRate",
+    "ini_style": "int",
+    "section": "/Script/OnlineSubsystemUtils.IpNetDriver",
+    "type": "integer"
+  },
+  "MAX_DEATH_MARKERS": {
+    "file": "ServerSettings.ini",
+    "group": "Death and Loot",
+    "ini_key": "MaxDeathMapMarkers",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "MAX_DECAY_AUTO_DEMOLISH": {
+    "file": "ServerSettings.ini",
+    "group": "Building and Land Claim",
+    "ini_key": "MaxDecayTimeToAutoDemolish",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "MAX_NUDITY": {
+    "file": "ServerSettings.ini",
+    "group": "Access and Security",
+    "ini_key": "MaxNudity",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "MAX_PLAYERS": {
+    "file": "Game.ini",
+    "group": "Rcon",
+    "ini_key": "MaxPlayers",
+    "ini_style": "int",
+    "section": "/Script/Engine.GameSession",
+    "type": "integer"
+  },
+  "MINION_DAMAGE": {
+    "file": "ServerSettings.ini",
+    "group": "Combat and Damage",
+    "ini_key": "MinionDamageMultiplier",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "MINION_DAMAGE_TAKEN": {
+    "file": "ServerSettings.ini",
+    "group": "Combat and Damage",
+    "ini_key": "MinionDamageTakenMultiplier",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "MINION_OVERPOP_ALLOWED": {
+    "file": "ServerSettings.ini",
+    "group": "Thralls and Followers",
+    "ini_key": "MinionOverpopulationAllowed",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "MINION_OVERPOP_CLEANUP": {
+    "file": "ServerSettings.ini",
+    "group": "Thralls and Followers",
+    "ini_key": "MinionOverpopulationCleanup",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "MINION_POP_BASE": {
+    "file": "ServerSettings.ini",
+    "group": "Thralls and Followers",
+    "ini_key": "MinionPopulationBaseValue",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "MINION_POP_PER_PLAYER": {
+    "file": "ServerSettings.ini",
+    "group": "Thralls and Followers",
+    "ini_key": "MinionPopulationPerPlayer",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "NIGHTTIME_SPEED": {
+    "file": "ServerSettings.ini",
+    "group": "Day Night and World",
+    "ini_key": "NightTimeSpeedScale",
+    "ini_style": "float",
+    "section": "ServerSettings",
+    "type": "float"
+  },
+  "NPC_CORPSE_LIFETIME": {
+    "file": "ServerSettings.ini",
+    "group": "Death and Loot",
+    "ini_key": "NPCCorpseLifeTime",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "NPC_DAMAGE": {
+    "file": "ServerSettings.ini",
+    "group": "Combat and Damage",
+    "ini_key": "NPCDamageMultiplier",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "NPC_DAMAGE_TAKEN": {
+    "file": "ServerSettings.ini",
+    "group": "Combat and Damage",
+    "ini_key": "NPCDamageTakenMultiplier",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "NPC_HEALTH": {
+    "file": "ServerSettings.ini",
+    "group": "Advanced Present Only",
+    "ini_key": "NPCHealthMultiplier",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "NPC_KNOCKBACK": {
+    "file": "ServerSettings.ini",
+    "group": "Combat and Damage",
+    "ini_key": "NPCKnockbackMultiplier",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "NPC_MAX_SPAWN_CAP": {
+    "file": "ServerSettings.ini",
+    "group": "Advanced Present Only",
+    "ini_key": "NPCMaxSpawnCapMultiplier",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "NPC_MIND_READING": {
+    "file": "ServerSettings.ini",
+    "group": "Advanced Present Only",
+    "ini_key": "NPCMindReadingMode",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "NPC_RESPAWN": {
+    "file": "ServerSettings.ini",
+    "group": "Advanced Present Only",
+    "ini_key": "NPCRespawnMultiplier",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "OFFLINE_BODY_HOURS": {
+    "file": "ServerSettings.ini",
+    "group": "Advanced Present Only",
+    "ini_key": "OfflinePlayersUnconsciousBodiesHours",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "OFFLINE_HUNGER": {
+    "file": "ServerSettings.ini",
+    "group": "Player Survival",
+    "ini_key": "PlayerOfflineHungerMultiplier",
+    "ini_style": "float",
+    "section": "ServerSettings",
+    "type": "float"
+  },
+  "OFFLINE_THIRST": {
+    "file": "ServerSettings.ini",
+    "group": "Player Survival",
+    "ini_key": "PlayerOfflineThirstMultiplier",
+    "ini_style": "float",
+    "section": "ServerSettings",
+    "type": "float"
+  },
+  "PATH_FOLLOWING_ANGULAR": {
+    "file": "ServerSettings.ini",
+    "group": "Advanced Present Only",
+    "ini_key": "PathFollowingSendsAngularVelocity",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "PLAYER_CORPSE_LIFETIME": {
+    "file": "ServerSettings.ini",
+    "group": "Death and Loot",
+    "ini_key": "PlayerCorpseLifeTime",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "PLAYER_CORRUPTION_GAIN": {
+    "file": "ServerSettings.ini",
+    "group": "Player Survival",
+    "ini_key": "PlayerCorruptionGainMultiplier",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "PLAYER_CORRUPTION_SORCERY": {
+    "file": "ServerSettings.ini",
+    "group": "Player Survival",
+    "ini_key": "PlayerCorruptionGainFromSorceryMultiplier",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "PLAYER_DAMAGE": {
+    "file": "ServerSettings.ini",
+    "group": "Combat and Damage",
+    "ini_key": "PlayerDamageMultiplier",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "PLAYER_DAMAGE_TAKEN": {
+    "file": "ServerSettings.ini",
+    "group": "Combat and Damage",
+    "ini_key": "PlayerDamageTakenMultiplier",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "PLAYER_ENCUMBRANCE": {
+    "file": "ServerSettings.ini",
+    "group": "Player Survival",
+    "ini_key": "PlayerEncumbranceMultiplier",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "PLAYER_ENCUMBRANCE_PENALTY": {
+    "file": "ServerSettings.ini",
+    "group": "Player Survival",
+    "ini_key": "PlayerEncumbrancePenaltyMultiplier",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "PLAYER_HEALTH": {
+    "file": "ServerSettings.ini",
+    "group": "Player Survival",
+    "ini_key": "PlayerHealthMultiplier",
+    "ini_style": "float",
+    "section": "ServerSettings",
+    "type": "float"
+  },
+  "PLAYER_KNOCKBACK": {
+    "file": "ServerSettings.ini",
+    "group": "Combat and Damage",
+    "ini_key": "PlayerKnockbackMultiplier",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "PLAYER_MOVE_SPEED": {
+    "file": "ServerSettings.ini",
+    "group": "Player Survival",
+    "ini_key": "PlayerMovementSpeedScale",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "PLAYER_SPRINT_SPEED": {
+    "file": "ServerSettings.ini",
+    "group": "Player Survival",
+    "ini_key": "PlayerSprintSpeedScale",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "PLAYER_STAMINA": {
+    "file": "ServerSettings.ini",
+    "group": "Player Survival",
+    "ini_key": "PlayerStaminaMultiplier",
+    "ini_style": "float",
+    "section": "ServerSettings",
+    "type": "float"
+  },
+  "POI_PROTECTION": {
+    "file": "ServerSettings.ini",
+    "group": "Building and Land Claim",
+    "ini_key": "PoiProtectionEnabled",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "PURGE_ALLOW_BUILDING": {
+    "file": "ServerSettings.ini",
+    "group": "Purge",
+    "ini_key": "PurgeAllowBuilding",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "PURGE_DURATION": {
+    "file": "ServerSettings.ini",
+    "group": "Purge",
+    "ini_key": "PurgeDuration",
+    "ini_style": "float",
+    "section": "ServerSettings",
+    "type": "float"
+  },
+  "PURGE_ENABLED": {
+    "file": "ServerSettings.ini",
+    "group": "Purge",
+    "ini_key": "PurgeEnabled",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "PURGE_LEVEL": {
+    "file": "ServerSettings.ini",
+    "group": "Purge",
+    "ini_key": "PurgeLevel",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "PURGE_MIN_PLAYERS": {
+    "file": "ServerSettings.ini",
+    "group": "Purge",
+    "ini_key": "MinimumNumberOfPlayersForPurge",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "PURGE_NPC_BUILDING_DAMAGE": {
+    "file": "ServerSettings.ini",
+    "group": "Purge",
+    "ini_key": "PurgeNPCBuildingDamageMultiplier",
+    "ini_style": "float",
+    "section": "ServerSettings",
+    "type": "float"
+  },
+  "PURGE_PREP_TIME": {
+    "file": "ServerSettings.ini",
+    "group": "Purge",
+    "ini_key": "PurgePreparationTime",
+    "ini_style": "float",
+    "section": "ServerSettings",
+    "type": "float"
+  },
+  "PURGE_TRIGGER_VALUE": {
+    "file": "ServerSettings.ini",
+    "group": "Purge",
+    "ini_key": "PurgeMeterTriggerValue",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "PVP_BLITZ": {
+    "file": "ServerSettings.ini",
+    "group": "PVP Schedule",
+    "ini_key": "PVPBlitzServer",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "PVP_BUILD_FRI_END": {
+    "file": "ServerSettings.ini",
+    "group": "PVP Schedule",
+    "ini_key": "PVPBuildingDamageTimeFridayEnd",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "PVP_BUILD_FRI_START": {
+    "file": "ServerSettings.ini",
+    "group": "PVP Schedule",
+    "ini_key": "PVPBuildingDamageTimeFridayStart",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "PVP_BUILD_MON_END": {
+    "file": "ServerSettings.ini",
+    "group": "PVP Schedule",
+    "ini_key": "PVPBuildingDamageTimeMondayEnd",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "PVP_BUILD_MON_START": {
+    "file": "ServerSettings.ini",
+    "group": "PVP Schedule",
+    "ini_key": "PVPBuildingDamageTimeMondayStart",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "PVP_BUILD_SAT_END": {
+    "file": "ServerSettings.ini",
+    "group": "PVP Schedule",
+    "ini_key": "PVPBuildingDamageTimeSaturdayEnd",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "PVP_BUILD_SAT_START": {
+    "file": "ServerSettings.ini",
+    "group": "PVP Schedule",
+    "ini_key": "PVPBuildingDamageTimeSaturdayStart",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "PVP_BUILD_SUN_END": {
+    "file": "ServerSettings.ini",
+    "group": "PVP Schedule",
+    "ini_key": "PVPBuildingDamageTimeSundayEnd",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "PVP_BUILD_SUN_START": {
+    "file": "ServerSettings.ini",
+    "group": "PVP Schedule",
+    "ini_key": "PVPBuildingDamageTimeSundayStart",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "PVP_BUILD_THU_END": {
+    "file": "ServerSettings.ini",
+    "group": "PVP Schedule",
+    "ini_key": "PVPBuildingDamageTimeThursdayEnd",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "PVP_BUILD_THU_START": {
+    "file": "ServerSettings.ini",
+    "group": "PVP Schedule",
+    "ini_key": "PVPBuildingDamageTimeThursdayStart",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "PVP_BUILD_TUE_END": {
+    "file": "ServerSettings.ini",
+    "group": "PVP Schedule",
+    "ini_key": "PVPBuildingDamageTimeTuesdayEnd",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "PVP_BUILD_TUE_START": {
+    "file": "ServerSettings.ini",
+    "group": "PVP Schedule",
+    "ini_key": "PVPBuildingDamageTimeTuesdayStart",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "PVP_BUILD_WED_END": {
+    "file": "ServerSettings.ini",
+    "group": "PVP Schedule",
+    "ini_key": "PVPBuildingDamageTimeWednesdayEnd",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "PVP_BUILD_WED_START": {
+    "file": "ServerSettings.ini",
+    "group": "PVP Schedule",
+    "ini_key": "PVPBuildingDamageTimeWednesdayStart",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "PVP_ENABLED": {
+    "file": "ServerSettings.ini",
+    "group": "Combat Mode",
+    "ini_key": "PVPEnabled",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "PVP_MOUNT_ENDURANCE_DAMAGE": {
+    "file": "ServerSettings.ini",
+    "group": "Combat and Damage",
+    "ini_key": "PvPMountEnduranceDamageMultiplier",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "PVP_TIME_FRI_END": {
+    "file": "ServerSettings.ini",
+    "group": "PVP Schedule",
+    "ini_key": "PVPTimeFridayEnd",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "PVP_TIME_FRI_START": {
+    "file": "ServerSettings.ini",
+    "group": "PVP Schedule",
+    "ini_key": "PVPTimeFridayStart",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "PVP_TIME_MON_END": {
+    "file": "ServerSettings.ini",
+    "group": "PVP Schedule",
+    "ini_key": "PVPTimeMondayEnd",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "PVP_TIME_MON_START": {
+    "file": "ServerSettings.ini",
+    "group": "PVP Schedule",
+    "ini_key": "PVPTimeMondayStart",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "PVP_TIME_SAT_END": {
+    "file": "ServerSettings.ini",
+    "group": "PVP Schedule",
+    "ini_key": "PVPTimeSaturdayEnd",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "PVP_TIME_SAT_START": {
+    "file": "ServerSettings.ini",
+    "group": "PVP Schedule",
+    "ini_key": "PVPTimeSaturdayStart",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "PVP_TIME_SUN_END": {
+    "file": "ServerSettings.ini",
+    "group": "PVP Schedule",
+    "ini_key": "PVPTimeSundayEnd",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "PVP_TIME_SUN_START": {
+    "file": "ServerSettings.ini",
+    "group": "PVP Schedule",
+    "ini_key": "PVPTimeSundayStart",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "PVP_TIME_THU_END": {
+    "file": "ServerSettings.ini",
+    "group": "PVP Schedule",
+    "ini_key": "PVPTimeThursdayEnd",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "PVP_TIME_THU_START": {
+    "file": "ServerSettings.ini",
+    "group": "PVP Schedule",
+    "ini_key": "PVPTimeThursdayStart",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "PVP_TIME_TUE_END": {
+    "file": "ServerSettings.ini",
+    "group": "PVP Schedule",
+    "ini_key": "PVPTimeTuesdayEnd",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "PVP_TIME_TUE_START": {
+    "file": "ServerSettings.ini",
+    "group": "PVP Schedule",
+    "ini_key": "PVPTimeTuesdayStart",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "PVP_TIME_WED_END": {
+    "file": "ServerSettings.ini",
+    "group": "PVP Schedule",
+    "ini_key": "PVPTimeWednesdayEnd",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "PVP_TIME_WED_START": {
+    "file": "ServerSettings.ini",
+    "group": "PVP Schedule",
+    "ini_key": "PVPTimeWednesdayStart",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "RCON_ENABLED": {
+    "file": "Game.ini",
+    "group": "Rcon",
+    "ini_key": "RconEnabled",
+    "ini_style": "TrueFalse",
+    "section": "RconPlugin",
+    "type": "boolean"
+  },
+  "RCON_MAX_KARMA": {
+    "file": "Game.ini",
+    "group": "Rcon",
+    "ini_key": "RconMaxKarma",
+    "ini_style": "int",
+    "section": "RconPlugin",
+    "type": "integer"
+  },
+  "RCON_PASSWORD": {
+    "file": "Game.ini",
+    "group": "Rcon",
+    "ini_key": "RconPassword",
+    "ini_style": "string",
+    "section": "RconPlugin",
+    "type": "password"
+  },
+  "RCON_PORT": {
+    "file": "Game.ini",
+    "group": "Rcon",
+    "ini_key": "RconPort",
+    "ini_style": "int",
+    "section": "RconPlugin",
+    "type": "integer"
+  },
+  "REGION_ALLOW_AFRICA": {
+    "file": "ServerSettings.ini",
+    "group": "Advanced Present Only",
+    "ini_key": "RegionAllowAfrica",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "REGION_ALLOW_ASIA": {
+    "file": "ServerSettings.ini",
+    "group": "Advanced Present Only",
+    "ini_key": "RegionAllowAsia",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "REGION_ALLOW_CENTRAL_EUROPE": {
+    "file": "ServerSettings.ini",
+    "group": "Advanced Present Only",
+    "ini_key": "RegionAllowCentralEurope",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "REGION_ALLOW_EASTERN_EUROPE": {
+    "file": "ServerSettings.ini",
+    "group": "Advanced Present Only",
+    "ini_key": "RegionAllowEasternEurope",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "REGION_ALLOW_NORTH_AMERICA": {
+    "file": "ServerSettings.ini",
+    "group": "Advanced Present Only",
+    "ini_key": "RegionAllowNorthAmerica",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "REGION_ALLOW_OCEANIA": {
+    "file": "ServerSettings.ini",
+    "group": "Advanced Present Only",
+    "ini_key": "RegionAllowOceania",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "REGION_ALLOW_SOUTH_AMERICA": {
+    "file": "ServerSettings.ini",
+    "group": "Advanced Present Only",
+    "ini_key": "RegionAllowSouthAmerica",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "REGION_ALLOW_WESTERN_EUROPE": {
+    "file": "ServerSettings.ini",
+    "group": "Advanced Present Only",
+    "ini_key": "RegionAllowWesternEurope",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "REGION_BLOCK_LIST": {
+    "file": "ServerSettings.ini",
+    "group": "Advanced Present Only",
+    "ini_key": "RegionBlockList",
+    "ini_style": "string",
+    "section": "ServerSettings",
+    "type": "string"
+  },
+  "RESOURCE_RESPAWN": {
+    "file": "ServerSettings.ini",
+    "group": "Harvest and Crafting",
+    "ini_key": "ResourceRespawnSpeedMultiplier",
+    "ini_style": "float",
+    "section": "ServerSettings",
+    "type": "float"
+  },
+  "RESTRICT_AVATAR_TIME": {
+    "file": "ServerSettings.ini",
+    "group": "Avatars",
+    "ini_key": "RestrictAvatarSummoningTime",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "RESTRICT_PURGE_TIME": {
+    "file": "ServerSettings.ini",
+    "group": "Purge",
+    "ini_key": "RestrictPurgeTime",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "RESTRICT_PVP_BUILDING_DAMAGE_TIME": {
+    "file": "ServerSettings.ini",
+    "group": "PVP Schedule",
+    "ini_key": "RestrictPVPBuildingDamageTime",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "RESTRICT_PVP_TIME": {
+    "file": "ServerSettings.ini",
+    "group": "PVP Schedule",
+    "ini_key": "RestrictPVPTime",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "SERVER_COMMUNITY": {
+    "file": "ServerSettings.ini",
+    "group": "Access and Security",
+    "ini_key": "ServerCommunity",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "SERVER_MOD_LIST": {
+    "file": "ServerSettings.ini",
+    "group": "Mods",
+    "ini_key": "ServerModList",
+    "ini_style": "string",
+    "section": "ServerSettings",
+    "type": "string"
+  },
+  "SERVER_MOTD": {
+    "file": "ServerSettings.ini",
+    "group": "Access and Security",
+    "ini_key": "ServerMessageOfTheDay",
+    "ini_style": "string",
+    "section": "ServerSettings",
+    "type": "text"
+  },
+  "SERVER_NAME": {
+    "file": "Engine.ini",
+    "group": "Engine",
+    "ini_key": "ServerName",
+    "ini_style": "string",
+    "section": "OnlineSubsystem",
+    "type": "string"
+  },
+  "SERVER_PASSWORD": {
+    "file": "Engine.ini",
+    "group": "Access and Security",
+    "ini_key": "ServerPassword",
+    "ini_style": "string",
+    "section": "OnlineSubsystemSteam",
+    "type": "password"
+  },
+  "SERVER_PORT": {
+    "file": "Engine.ini",
+    "group": "Engine",
+    "ini_key": "Port",
+    "ini_style": "int",
+    "section": "URL",
+    "type": "integer"
+  },
+  "SERVER_REGION": {
+    "file": "ServerSettings.ini",
+    "group": "Access and Security",
+    "ini_key": "serverRegion",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "SHIELD_DURABILITY": {
+    "file": "ServerSettings.ini",
+    "group": "Harvest and Crafting",
+    "ini_key": "ShieldDurabilityMultiplier",
+    "ini_style": "float",
+    "section": "ServerSettings",
+    "type": "float"
+  },
+  "SHOW_ONLINE_PLAYERS": {
+    "file": "ServerSettings.ini",
+    "group": "Chat and Social",
+    "ini_key": "ShowOnlinePlayers",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "STABILITY_LOSS": {
+    "file": "ServerSettings.ini",
+    "group": "Building and Land Claim",
+    "ini_key": "StabilityLossMultiplier",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "STAMINA_CONSUME_PAUSE": {
+    "file": "ServerSettings.ini",
+    "group": "Player Survival",
+    "ini_key": "StaminaOnConsumeRegenPause",
+    "ini_style": "float",
+    "section": "ServerSettings",
+    "type": "float"
+  },
+  "STAMINA_COST": {
+    "file": "ServerSettings.ini",
+    "group": "Player Survival",
+    "ini_key": "PlayerStaminaCostMultiplier",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "STAMINA_EXHAUSTION_PAUSE": {
+    "file": "ServerSettings.ini",
+    "group": "Player Survival",
+    "ini_key": "StaminaOnExhaustionRegenPause",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "STAMINA_EXHAUSTION_TIME": {
+    "file": "ServerSettings.ini",
+    "group": "Player Survival",
+    "ini_key": "StaminaExhaustionTime",
+    "ini_style": "float",
+    "section": "ServerSettings",
+    "type": "float"
+  },
+  "STAMINA_MOVING_REGEN": {
+    "file": "ServerSettings.ini",
+    "group": "Player Survival",
+    "ini_key": "StaminaMovingRegenRateMultiplier",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "STAMINA_REGEN_SPEED": {
+    "file": "ServerSettings.ini",
+    "group": "Player Survival",
+    "ini_key": "PlayerStaminaRegenSpeedScale",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "STAMINA_REGEN_TIME": {
+    "file": "ServerSettings.ini",
+    "group": "Player Survival",
+    "ini_key": "StaminaRegenerationTime",
+    "ini_style": "float",
+    "section": "ServerSettings",
+    "type": "float"
+  },
+  "STAMINA_SPRINT_COST": {
+    "file": "ServerSettings.ini",
+    "group": "Player Survival",
+    "ini_key": "PlayerStaminaCostSprintMultiplier",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "STAMINA_STATIC_REGEN": {
+    "file": "ServerSettings.ini",
+    "group": "Player Survival",
+    "ini_key": "StaminaStaticRegenRateMultiplier",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "STARVATION_DAMAGE_CAP": {
+    "file": "ServerSettings.ini",
+    "group": "Combat and Damage",
+    "ini_key": "StarvationDamagePenaltyCap",
+    "ini_style": "float",
+    "section": "ServerSettings",
+    "type": "float"
+  },
+  "STARVATION_TIME": {
+    "file": "ServerSettings.ini",
+    "group": "Player Survival",
+    "ini_key": "StarvationTimeInMinutes",
+    "ini_style": "float",
+    "section": "ServerSettings",
+    "type": "float"
+  },
+  "STRUCTURE_DAMAGE": {
+    "file": "ServerSettings.ini",
+    "group": "Combat and Damage",
+    "ini_key": "StructureDamageMultiplier",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "STRUCTURE_HEALTH": {
+    "file": "ServerSettings.ini",
+    "group": "Combat and Damage",
+    "ini_key": "StructureHealthMultiplier",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "THRALL_CONVERSION": {
+    "file": "ServerSettings.ini",
+    "group": "Thralls and Followers",
+    "ini_key": "ThrallConversionMultiplier",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "THRALL_CORRUPTION_REMOVAL": {
+    "file": "ServerSettings.ini",
+    "group": "Player Survival",
+    "ini_key": "ThrallCorruptionRemovalMultiplier",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "THRALL_CRAFTING_TIME": {
+    "file": "ServerSettings.ini",
+    "group": "Harvest and Crafting",
+    "ini_key": "ThrallCraftingTimeMultiplier",
+    "ini_style": "float",
+    "section": "ServerSettings",
+    "type": "float"
+  },
+  "THRALL_DAMAGE_TO_NPCS": {
+    "file": "ServerSettings.ini",
+    "group": "Combat and Damage",
+    "ini_key": "ThrallDamageToNPCsMultiplier",
+    "ini_style": "float",
+    "section": "ServerSettings",
+    "type": "float"
+  },
+  "THRALL_DAMAGE_TO_PLAYERS": {
+    "file": "ServerSettings.ini",
+    "group": "Combat and Damage",
+    "ini_key": "ThrallDamageToPlayersMultiplier",
+    "ini_style": "float",
+    "section": "ServerSettings",
+    "type": "float"
+  },
+  "THRALL_DECAY_TIME": {
+    "file": "ServerSettings.ini",
+    "group": "Building and Land Claim",
+    "ini_key": "ThrallDecayTime",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "THRALL_EXCLUSION_RADIUS": {
+    "file": "ServerSettings.ini",
+    "group": "Thralls and Followers",
+    "ini_key": "ThrallExclusionRadius",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "THRALL_MIN_DISTANCE": {
+    "file": "ServerSettings.ini",
+    "group": "Thralls and Followers",
+    "ini_key": "ThrallMinDistanceAwayFromHome",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "THRALL_SCOUTING_TIME": {
+    "file": "ServerSettings.ini",
+    "group": "Thralls and Followers",
+    "ini_key": "ThrallScoutingTimeMinutes",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "THRALL_TELEPORT_COOLDOWN": {
+    "file": "ServerSettings.ini",
+    "group": "Thralls and Followers",
+    "ini_key": "ThrallTeleportingCooldown",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "THRALL_WAKEUP_TIME": {
+    "file": "ServerSettings.ini",
+    "group": "Thralls and Followers",
+    "ini_key": "ThrallWakeupTime",
+    "ini_style": "float",
+    "section": "ServerSettings",
+    "type": "float"
+  },
+  "UNCONSCIOUS_TIME": {
+    "file": "ServerSettings.ini",
+    "group": "Advanced Present Only",
+    "ini_key": "UnconsciousTimeSeconds",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "USE_CATCHUP_TIME": {
+    "file": "ServerSettings.ini",
+    "group": "Day Night and World",
+    "ini_key": "UseClientCatchUpTime",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "USE_MINION_POP_LIMIT": {
+    "file": "ServerSettings.ini",
+    "group": "Thralls and Followers",
+    "ini_key": "UseMinionPopulationLimit",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "VAC_ENABLED": {
+    "file": "ServerSettings.ini",
+    "group": "Access and Security",
+    "ini_key": "IsVACEnabled",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "VALIDATE_PLAYER_STATS": {
+    "file": "ServerSettings.ini",
+    "group": "Advanced Present Only",
+    "ini_key": "ValidatePlayerStats",
+    "ini_style": "TrueFalse",
+    "section": "ServerSettings",
+    "type": "boolean"
+  },
+  "VOICE_CHAT": {
+    "file": "ServerSettings.ini",
+    "group": "Chat and Social",
+    "ini_key": "serverVoiceChat",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "XP_CRAFT": {
+    "file": "ServerSettings.ini",
+    "group": "Progression and XP",
+    "ini_key": "PlayerXPCraftMultiplier",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "XP_HARVEST": {
+    "file": "ServerSettings.ini",
+    "group": "Progression and XP",
+    "ini_key": "PlayerXPHarvestMultiplier",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "XP_KILL": {
+    "file": "ServerSettings.ini",
+    "group": "Progression and XP",
+    "ini_key": "PlayerXPKillMultiplier",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "XP_RATE": {
+    "file": "ServerSettings.ini",
+    "group": "Progression and XP",
+    "ini_key": "PlayerXPRateMultiplier",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  },
+  "XP_TIME": {
+    "file": "ServerSettings.ini",
+    "group": "Progression and XP",
+    "ini_key": "PlayerXPTimeMultiplier",
+    "ini_style": "int",
+    "section": "ServerSettings",
+    "type": "integer"
+  }
+}

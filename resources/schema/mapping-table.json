@@ -1,0 +1,3808 @@
+[
+  {
+    "file": "Engine.ini",
+    "section": "/Script/OnlineSubsystemUtils.IpNetDriver",
+    "ini_key": "MaxClientRate",
+    "env_var": "MAX_CLIENT_RATE",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Engine",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "Engine.ini",
+    "section": "/Script/OnlineSubsystemUtils.IpNetDriver",
+    "ini_key": "MaxInternetClientRate",
+    "env_var": "MAX_CLIENT_RATE",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Engine",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "Engine.ini",
+    "section": "URL",
+    "ini_key": "Port",
+    "env_var": "SERVER_PORT",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Engine",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "Engine.ini",
+    "section": "OnlineSubsystem",
+    "ini_key": "ServerName",
+    "env_var": "SERVER_NAME",
+    "type": "string",
+    "ini_style": "string",
+    "group": "Engine",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "Engine.ini",
+    "section": "OnlineSubsystem",
+    "ini_key": "ServerPassword",
+    "env_var": "SERVER_PASSWORD",
+    "type": "password",
+    "ini_style": "string",
+    "group": "Access and Security",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "Engine.ini",
+    "section": "OnlineSubsystemSteam",
+    "ini_key": "ServerPassword",
+    "env_var": "SERVER_PASSWORD",
+    "type": "password",
+    "ini_style": "string",
+    "group": "Access and Security",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "Game.ini",
+    "section": "/Script/Engine.GameSession",
+    "ini_key": "MaxPlayers",
+    "env_var": "MAX_PLAYERS",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Rcon",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "Game.ini",
+    "section": "RconPlugin",
+    "ini_key": "RconEnabled",
+    "env_var": "RCON_ENABLED",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Rcon",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "Game.ini",
+    "section": "RconPlugin",
+    "ini_key": "RconMaxKarma",
+    "env_var": "RCON_MAX_KARMA",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Rcon",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "Game.ini",
+    "section": "RconPlugin",
+    "ini_key": "RconPassword",
+    "env_var": "RCON_PASSWORD",
+    "type": "password",
+    "ini_style": "string",
+    "group": "Rcon",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "Game.ini",
+    "section": "RconPlugin",
+    "ini_key": "RconPort",
+    "env_var": "RCON_PORT",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Rcon",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "AdminPassword",
+    "env_var": "ADMIN_PASSWORD",
+    "type": "password",
+    "ini_style": "string",
+    "group": "Access and Security",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "AllowBuildingAnywhere",
+    "env_var": "BUILD_ANYWHERE",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Building and Land Claim",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "AllowedDistanceUndermeshSquared",
+    "env_var": "ALLOWED_DISTANCE_UNDERMESH",
+    "type": "float",
+    "ini_style": "float",
+    "group": "Network and Performance",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "AllowedTimeUndermesh",
+    "env_var": "ALLOWED_TIME_UNDERMESH",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Network and Performance",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "AllowFamilySharedAccount",
+    "env_var": "ALLOW_FAMILY_SHARE",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Access and Security",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "AmbientLifeEnabled",
+    "env_var": "AMBIENT_LIFE",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Day Night and World",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "AnimalPenCraftingTimeMultiplier",
+    "env_var": "ANIMAL_PEN_CRAFT_TIME",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Harvest and Crafting",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "AvatarDomeDamageMultiplier",
+    "env_var": "AVATAR_DOME_DAMAGE",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Avatars",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "AvatarDomeDurationMultiplier",
+    "env_var": "AVATAR_DOME_DURATION",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Avatars",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "AvatarLifetime",
+    "env_var": "AVATAR_LIFETIME",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Avatars",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "AvatarsDisabled",
+    "env_var": "AVATARS_DISABLED",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Avatars",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "AvatarSummoningTimeWeekdayEnd",
+    "env_var": "AVATAR_WEEKDAY_END",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Avatars",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "AvatarSummoningTimeWeekdayStart",
+    "env_var": "AVATAR_WEEKDAY_START",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Avatars",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "AvatarSummoningTimeWeekendEnd",
+    "env_var": "AVATAR_WEEKEND_END",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Avatars",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "AvatarSummoningTimeWeekendStart",
+    "env_var": "AVATAR_WEEKEND_START",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Avatars",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "AvatarSummonTime",
+    "env_var": "AVATAR_SUMMON_TIME",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Avatars",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "bCanBeDamaged",
+    "env_var": null,
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Combat and Damage",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "BlueprintConfigVersion",
+    "env_var": null,
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Meta",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "BuildFromStorageRadius",
+    "env_var": null,
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Building and Land Claim",
+    "present_on_live": true,
+    "sources": [
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "BuildingDamageMultiplier",
+    "env_var": "BUILDING_DAMAGE",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Combat and Damage",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "BuildingDecayTimeMultiplier",
+    "env_var": "BUILDING_DECAY_MULTIPLIER",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Building and Land Claim",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "BuildingDecayTimePerScore",
+    "env_var": "BUILDING_DECAY_PER_SCORE",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Building and Land Claim",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "BuildingPickupEnabled",
+    "env_var": "BUILDING_PICKUP",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Building and Land Claim",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "BuildingPreloadRadius",
+    "env_var": "BUILDING_PRELOAD_RADIUS",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Building and Land Claim",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "BuildingPVPWhitelist",
+    "env_var": null,
+    "type": "string",
+    "ini_style": "string",
+    "group": "Building and Land Claim",
+    "present_on_live": true,
+    "sources": [
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "BuildingReplicationDistance",
+    "env_var": null,
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Building and Land Claim",
+    "present_on_live": true,
+    "sources": [
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "BuildingValidationEnabled",
+    "env_var": "BUILDING_VALIDATION",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Building and Land Claim",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "bUndermeshDetectionEnabled",
+    "env_var": null,
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Network and Performance",
+    "present_on_live": true,
+    "sources": [
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "CachedBuildingReplicationDistance",
+    "env_var": null,
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Building and Land Claim",
+    "present_on_live": true,
+    "sources": [
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "CachedLandClaimRadiusMultiplier",
+    "env_var": null,
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Building and Land Claim",
+    "present_on_live": true,
+    "sources": [
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "CampsIgnoreLandclaim",
+    "env_var": "CAMPS_IGNORE_LANDCLAIM",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Building and Land Claim",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "CanDamagePlayerOwnedStructures",
+    "env_var": "CAN_DAMAGE_OWN_STRUCTURES",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Combat and Damage",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "CapCharacterLayoutScalarParams",
+    "env_var": "CAP_CHARACTER_LAYOUT",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Advanced Present Only",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "ChatHasGlobal",
+    "env_var": "CHAT_HAS_GLOBAL",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Chat and Social",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "ChatLocalRadius",
+    "env_var": "CHAT_LOCAL_RADIUS",
+    "type": "float",
+    "ini_style": "float",
+    "group": "Chat and Social",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "ChatMaxMessageLength",
+    "env_var": "CHAT_MAX_LENGTH",
+    "type": "text",
+    "ini_style": "string",
+    "group": "Chat and Social",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "ClampBuildingDamageToResources",
+    "env_var": "CLAMP_BUILDING_DAMAGE",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Combat and Damage",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "clanMaxSize",
+    "env_var": "CLAN_MAX_SIZE",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Chat and Social",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "CombatModeModifier",
+    "env_var": "COMBAT_MODE_MODIFIER",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Combat Mode",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "ConciousnessDamageMultiplier",
+    "env_var": "CONSCIOUSNESS_DAMAGE",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Combat and Damage",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "ConfigVersion",
+    "env_var": null,
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Meta",
+    "present_on_live": true,
+    "sources": [
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "ContainersIgnoreOwnership",
+    "env_var": "CONTAINERS_IGNORE_OWNERSHIP",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Advanced Present Only",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "CorpsesPerPlayer",
+    "env_var": "CORPSES_PER_PLAYER",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Death and Loot",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "CraftFromStorageRadius",
+    "env_var": null,
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Harvest and Crafting",
+    "present_on_live": true,
+    "sources": [
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "CraftingCostMultiplier",
+    "env_var": "CRAFTING_COST",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Harvest and Crafting",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "CraftingSpeedMultiplier",
+    "env_var": "CRAFTING_SPEED",
+    "type": "float",
+    "ini_style": "float",
+    "group": "Harvest and Crafting",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "CreativeModeServer",
+    "env_var": "CREATIVE_MODE",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Access and Security",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "CrossDesertOnce",
+    "env_var": "CROSS_DESERT_ONCE",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Advanced Present Only",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "DamageCooldownBeforeRescue",
+    "env_var": "DAMAGE_COOLDOWN_RESCUE",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Combat and Damage",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "DawnDuskSpeedScale",
+    "env_var": "DAWN_DUSK_SPEED",
+    "type": "float",
+    "ini_style": "float",
+    "group": "Day Night and World",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "DayCycleSpeedScale",
+    "env_var": "DAY_CYCLE_SPEED",
+    "type": "float",
+    "ini_style": "float",
+    "group": "Day Night and World",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "DayTimeSpeedScale",
+    "env_var": "DAYTIME_SPEED",
+    "type": "float",
+    "ini_style": "float",
+    "group": "Day Night and World",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "DecayBonusTimeRate",
+    "env_var": "DECAY_BONUS_TIME_RATE",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Building and Land Claim",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "DecayCleanupTimeMultiplier",
+    "env_var": "DECAY_CLEANUP_MULTIPLIER",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Building and Land Claim",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "DecayShowBuildingScore",
+    "env_var": "DECAY_SHOW_SCORE",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Building and Land Claim",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "DisableBuildingAbandonment",
+    "env_var": "DISABLE_BUILDING_DECAY",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Building and Land Claim",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "DisableBuildingDuringTimeRestrictedPVP",
+    "env_var": "DISABLE_BUILDING_DURING_PVP",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Building and Land Claim",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "DisableChatFormatting",
+    "env_var": "DISABLE_CHAT_FORMATTING",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Chat and Social",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "DisableLandclaimNotifications",
+    "env_var": "DISABLE_LANDCLAIM_NOTIFICATIONS",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Building and Land Claim",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "DisableThrallDecay",
+    "env_var": "DISABLE_THRALL_DECAY",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Building and Land Claim",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "DisconnectionGraceTime",
+    "env_var": "DISCONNECTION_GRACE_TIME",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Network and Performance",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "DogsOfTheDesertSpawnWithDogs",
+    "env_var": "DOGS_SPAWN_WITH_DOGS",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Advanced Present Only",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "DropBackpackOnDeath",
+    "env_var": "DROP_BACKPACK_ON_DEATH",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Death and Loot",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "DropEquipmentOnDeath",
+    "env_var": "DROP_EQUIPMENT_ON_DEATH",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Death and Loot",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "DropShortcutbarOnDeath",
+    "env_var": "DROP_SHORTCUTBAR_ON_DEATH",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Death and Loot",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "DurabilityMultiplier",
+    "env_var": "DURABILITY",
+    "type": "float",
+    "ini_style": "float",
+    "group": "Harvest and Crafting",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "DynamicBuildingDamage",
+    "env_var": "DYNAMIC_BUILDING_DAMAGE",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Combat and Damage",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "DynamicBuildingDamagePeriod",
+    "env_var": "DYNAMIC_BUILDING_DAMAGE_PERIOD",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Combat and Damage",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "EnableClanMarkers",
+    "env_var": "ENABLE_CLAN_MARKERS",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Chat and Social",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "EnableFatalities",
+    "env_var": "ENABLE_FATALITIES",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Combat and Damage",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "EnableFollowerDbno",
+    "env_var": "ENABLE_FOLLOWER_DBNO",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Thralls and Followers",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "EnableFollowerRescueInBuildExclusionZone",
+    "env_var": "FOLLOWER_RESCUE_EXCLUSION",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Building and Land Claim",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "EnableFollowerRescueOnLandClaimOnly",
+    "env_var": "ENABLE_FOLLOWER_RESCUE",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Building and Land Claim",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "EnableHungerSystemPets",
+    "env_var": "HUNGER_SYSTEM_PETS",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Player Survival",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "EnableHungerSystemThralls",
+    "env_var": "HUNGER_SYSTEM_THRALLS",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Player Survival",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "EnableLoginQueue",
+    "env_var": "ENABLE_LOGIN_QUEUE",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Network and Performance",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "EnableTargetLock",
+    "env_var": "ENABLE_TARGET_LOCK",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Combat and Damage",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "EventLogPvECauserPrivacy",
+    "env_var": "EVENT_LOG_PVE_PRIVACY",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Access and Security",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "EventLogPvPCauserPrivacy",
+    "env_var": "EVENT_LOG_PVP_PRIVACY",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Access and Security",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "EventSystemEnabled",
+    "env_var": "EVENT_SYSTEM",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Advanced Present Only",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "EverybodyCanLootCorpse",
+    "env_var": "EVERYBODY_LOOT_CORPSE",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Death and Loot",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "ExclusiveDiet",
+    "env_var": "EXCLUSIVE_DIET",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Thralls and Followers",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "FeedBoxRangeMultiplier",
+    "env_var": "FEED_BOX_RANGE",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Thralls and Followers",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "FollowerRescueCooldown",
+    "env_var": "FOLLOWER_RESCUE_COOLDOWN",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Thralls and Followers",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "FriendlyFireDamageMultiplier",
+    "env_var": "FRIENDLY_FIRE_DAMAGE",
+    "type": "float",
+    "ini_style": "float",
+    "group": "Combat and Damage",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "FuelBurnTimeMultiplier",
+    "env_var": "FUEL_BURN_TIME",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Harvest and Crafting",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "HarvestAmountMultiplier",
+    "env_var": "HARVEST_AMOUNT",
+    "type": "float",
+    "ini_style": "float",
+    "group": "Harvest and Crafting",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "HealthbarVisibilityDistance",
+    "env_var": "HEALTHBAR_DISTANCE",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Advanced Present Only",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "IsBattlEyeEnabled",
+    "env_var": "BATTLEYE_ENABLED",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Access and Security",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "IsVACEnabled",
+    "env_var": "VAC_ENABLED",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Access and Security",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "ItemConvertionMultiplier",
+    "env_var": "ITEM_CONVERSION",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Harvest and Crafting",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "ItemRepairDurabilityLossByRepairkitTier",
+    "env_var": "ITEM_REPAIR_LOSS_BY_TIER",
+    "type": "string",
+    "ini_style": "string",
+    "group": "Harvest and Crafting",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "ItemRepairDurabilityLossPenaltyChance",
+    "env_var": "ITEM_REPAIR_PENALTY_CHANCE",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Harvest and Crafting",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "ItemRepairMinimumDurability",
+    "env_var": "ITEM_REPAIR_MIN_DURABILITY",
+    "type": "float",
+    "ini_style": "float",
+    "group": "Harvest and Crafting",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "ItemSpoilRateScale",
+    "env_var": "ITEM_SPOIL_RATE",
+    "type": "float",
+    "ini_style": "float",
+    "group": "Harvest and Crafting",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "KickAFKPercentage",
+    "env_var": "KICK_AFK_PERCENTAGE",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Network and Performance",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "KickAFKTime",
+    "env_var": "KICK_AFK_TIME",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Network and Performance",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "LandClaimRadiusMultiplier",
+    "env_var": "LAND_CLAIM_RADIUS",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Building and Land Claim",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "LocalLandClaimVisualizationChannel",
+    "env_var": null,
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Building and Land Claim",
+    "present_on_live": true,
+    "sources": [
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "LocalLandClaimVisualizationFrequency",
+    "env_var": null,
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Building and Land Claim",
+    "present_on_live": true,
+    "sources": [
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "LocalLandClaimVisualizationRadius",
+    "env_var": null,
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Building and Land Claim",
+    "present_on_live": true,
+    "sources": [
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "LocalNavMeshVisualizationFrequency",
+    "env_var": null,
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Network and Performance",
+    "present_on_live": true,
+    "sources": [
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "LogoutCharactersRemainInTheWorld",
+    "env_var": "LOGOUT_REMAIN",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Day Night and World",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "LQAVPFadeTime",
+    "env_var": null,
+    "type": "float",
+    "ini_style": "float",
+    "group": "Network and Performance",
+    "present_on_live": true,
+    "sources": [
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "LQAVPMethod",
+    "env_var": null,
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Network and Performance",
+    "present_on_live": true,
+    "sources": [
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "LQAVPUseTime",
+    "env_var": null,
+    "type": "float",
+    "ini_style": "float",
+    "group": "Network and Performance",
+    "present_on_live": true,
+    "sources": [
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "MaxAggroRange",
+    "env_var": "MAX_AGGRO_RANGE",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Advanced Present Only",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "MaxAllowedPing",
+    "env_var": "MAX_ALLOWED_PING",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Network and Performance",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "MaxBuildingDecayTime",
+    "env_var": "MAX_BUILDING_DECAY_TIME",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Building and Land Claim",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "MaxDeathMapMarkers",
+    "env_var": "MAX_DEATH_MARKERS",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Death and Loot",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "MaxDecayTimeToAutoDemolish",
+    "env_var": "MAX_DECAY_AUTO_DEMOLISH",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Building and Land Claim",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "MaxNudity",
+    "env_var": "MAX_NUDITY",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Access and Security",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "MinimumNumberOfPlayersForPurge",
+    "env_var": "PURGE_MIN_PLAYERS",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Purge",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "MinionDamageMultiplier",
+    "env_var": "MINION_DAMAGE",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Combat and Damage",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "MinionDamageTakenMultiplier",
+    "env_var": "MINION_DAMAGE_TAKEN",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Combat and Damage",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "MinionOverpopulationAllowed",
+    "env_var": "MINION_OVERPOP_ALLOWED",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Thralls and Followers",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "MinionOverpopulationCleanup",
+    "env_var": "MINION_OVERPOP_CLEANUP",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Thralls and Followers",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "MinionPopulationBaseValue",
+    "env_var": "MINION_POP_BASE",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Thralls and Followers",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "MinionPopulationPerPlayer",
+    "env_var": "MINION_POP_PER_PLAYER",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Thralls and Followers",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "NetworkSimulatedSmoothRotationTimeWithLQAVP",
+    "env_var": null,
+    "type": "float",
+    "ini_style": "float",
+    "group": "Network and Performance",
+    "present_on_live": true,
+    "sources": [
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "NightTimeSpeedScale",
+    "env_var": "NIGHTTIME_SPEED",
+    "type": "float",
+    "ini_style": "float",
+    "group": "Day Night and World",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "NPCCorpseLifeTime",
+    "env_var": "NPC_CORPSE_LIFETIME",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Death and Loot",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "NPCDamageMultiplier",
+    "env_var": "NPC_DAMAGE",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Combat and Damage",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "NPCDamageTakenMultiplier",
+    "env_var": "NPC_DAMAGE_TAKEN",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Combat and Damage",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "NPCHealthMultiplier",
+    "env_var": "NPC_HEALTH",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Advanced Present Only",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "NPCKnockbackMultiplier",
+    "env_var": "NPC_KNOCKBACK",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Combat and Damage",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "NPCMaxSpawnCapMultiplier",
+    "env_var": "NPC_MAX_SPAWN_CAP",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Advanced Present Only",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "NPCMindReadingMode",
+    "env_var": "NPC_MIND_READING",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Advanced Present Only",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "NPCRespawnMultiplier",
+    "env_var": "NPC_RESPAWN",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Advanced Present Only",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "OfflinePlayersUnconsciousBodiesHours",
+    "env_var": "OFFLINE_BODY_HOURS",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Advanced Present Only",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PathFollowingSendsAngularVelocity",
+    "env_var": "PATH_FOLLOWING_ANGULAR",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Advanced Present Only",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PersonalCraftFromStorageRadius",
+    "env_var": null,
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Harvest and Crafting",
+    "present_on_live": true,
+    "sources": [
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PlayerActiveHungerMultiplier",
+    "env_var": "ACTIVE_HUNGER",
+    "type": "float",
+    "ini_style": "float",
+    "group": "Player Survival",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PlayerActiveThirstMultiplier",
+    "env_var": "ACTIVE_THIRST",
+    "type": "float",
+    "ini_style": "float",
+    "group": "Player Survival",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PlayerCorpseLifeTime",
+    "env_var": "PLAYER_CORPSE_LIFETIME",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Death and Loot",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PlayerCorruptionGainFromSorceryMultiplier",
+    "env_var": "PLAYER_CORRUPTION_SORCERY",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Player Survival",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PlayerCorruptionGainMultiplier",
+    "env_var": "PLAYER_CORRUPTION_GAIN",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Player Survival",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PlayerDamageMultiplier",
+    "env_var": "PLAYER_DAMAGE",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Combat and Damage",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PlayerDamageTakenMultiplier",
+    "env_var": "PLAYER_DAMAGE_TAKEN",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Combat and Damage",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PlayerEncumbranceMultiplier",
+    "env_var": "PLAYER_ENCUMBRANCE",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Player Survival",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PlayerEncumbrancePenaltyMultiplier",
+    "env_var": "PLAYER_ENCUMBRANCE_PENALTY",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Player Survival",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PlayerHealthMultiplier",
+    "env_var": "PLAYER_HEALTH",
+    "type": "float",
+    "ini_style": "float",
+    "group": "Player Survival",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PlayerHealthRegenSpeedScale",
+    "env_var": "HEALTH_REGEN_SPEED",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Player Survival",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PlayerIdleHungerMultiplier",
+    "env_var": "IDLE_HUNGER",
+    "type": "float",
+    "ini_style": "float",
+    "group": "Player Survival",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PlayerIdleThirstMultiplier",
+    "env_var": "IDLE_THIRST",
+    "type": "float",
+    "ini_style": "float",
+    "group": "Player Survival",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PlayerKnockbackMultiplier",
+    "env_var": "PLAYER_KNOCKBACK",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Combat and Damage",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PlayerMovementSpeedScale",
+    "env_var": "PLAYER_MOVE_SPEED",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Player Survival",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PlayerOfflineHungerMultiplier",
+    "env_var": "OFFLINE_HUNGER",
+    "type": "float",
+    "ini_style": "float",
+    "group": "Player Survival",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PlayerOfflineThirstMultiplier",
+    "env_var": "OFFLINE_THIRST",
+    "type": "float",
+    "ini_style": "float",
+    "group": "Player Survival",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PlayerSprintSpeedScale",
+    "env_var": "PLAYER_SPRINT_SPEED",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Player Survival",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PlayerStaminaCostMultiplier",
+    "env_var": "STAMINA_COST",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Player Survival",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PlayerStaminaCostSprintMultiplier",
+    "env_var": "STAMINA_SPRINT_COST",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Player Survival",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PlayerStaminaMultiplier",
+    "env_var": "PLAYER_STAMINA",
+    "type": "float",
+    "ini_style": "float",
+    "group": "Player Survival",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PlayerStaminaRegenSpeedScale",
+    "env_var": "STAMINA_REGEN_SPEED",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Player Survival",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PlayerXPCraftMultiplier",
+    "env_var": "XP_CRAFT",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Progression and XP",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PlayerXPHarvestMultiplier",
+    "env_var": "XP_HARVEST",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Progression and XP",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PlayerXPKillMultiplier",
+    "env_var": "XP_KILL",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Progression and XP",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PlayerXPRateMultiplier",
+    "env_var": "XP_RATE",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Progression and XP",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PlayerXPTimeMultiplier",
+    "env_var": "XP_TIME",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Progression and XP",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PoiProtectionEnabled",
+    "env_var": "POI_PROTECTION",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Building and Land Claim",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PurgeAllowBuilding",
+    "env_var": "PURGE_ALLOW_BUILDING",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Purge",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PurgeDuration",
+    "env_var": "PURGE_DURATION",
+    "type": "float",
+    "ini_style": "float",
+    "group": "Purge",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PurgeEnabled",
+    "env_var": "PURGE_ENABLED",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Purge",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PurgeLevel",
+    "env_var": "PURGE_LEVEL",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Purge",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PurgeMeterTriggerValue",
+    "env_var": "PURGE_TRIGGER_VALUE",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Purge",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PurgeNPCBuildingDamageMultiplier",
+    "env_var": "PURGE_NPC_BUILDING_DAMAGE",
+    "type": "float",
+    "ini_style": "float",
+    "group": "Purge",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PurgePreparationTime",
+    "env_var": "PURGE_PREP_TIME",
+    "type": "float",
+    "ini_style": "float",
+    "group": "Purge",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PVPBlitzServer",
+    "env_var": "PVP_BLITZ",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "PVP Schedule",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PVPBuildFromStorageRadius",
+    "env_var": null,
+    "type": "integer",
+    "ini_style": "int",
+    "group": "PVP Schedule",
+    "present_on_live": true,
+    "sources": [
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PVPBuildingDamageEnabledFriday",
+    "env_var": null,
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "PVP Schedule",
+    "present_on_live": true,
+    "sources": [
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PVPBuildingDamageEnabledMonday",
+    "env_var": null,
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "PVP Schedule",
+    "present_on_live": true,
+    "sources": [
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PVPBuildingDamageEnabledSaturday",
+    "env_var": null,
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "PVP Schedule",
+    "present_on_live": true,
+    "sources": [
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PVPBuildingDamageEnabledSunday",
+    "env_var": null,
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "PVP Schedule",
+    "present_on_live": true,
+    "sources": [
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PVPBuildingDamageEnabledThursday",
+    "env_var": null,
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "PVP Schedule",
+    "present_on_live": true,
+    "sources": [
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PVPBuildingDamageEnabledTuesday",
+    "env_var": null,
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "PVP Schedule",
+    "present_on_live": true,
+    "sources": [
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PVPBuildingDamageEnabledWednesday",
+    "env_var": null,
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "PVP Schedule",
+    "present_on_live": true,
+    "sources": [
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PVPBuildingDamageTimeFridayEnd",
+    "env_var": "PVP_BUILD_FRI_END",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "PVP Schedule",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PVPBuildingDamageTimeFridayStart",
+    "env_var": "PVP_BUILD_FRI_START",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "PVP Schedule",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PVPBuildingDamageTimeMondayEnd",
+    "env_var": "PVP_BUILD_MON_END",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "PVP Schedule",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PVPBuildingDamageTimeMondayStart",
+    "env_var": "PVP_BUILD_MON_START",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "PVP Schedule",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PVPBuildingDamageTimeSaturdayEnd",
+    "env_var": "PVP_BUILD_SAT_END",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "PVP Schedule",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PVPBuildingDamageTimeSaturdayStart",
+    "env_var": "PVP_BUILD_SAT_START",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "PVP Schedule",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PVPBuildingDamageTimeSundayEnd",
+    "env_var": "PVP_BUILD_SUN_END",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "PVP Schedule",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PVPBuildingDamageTimeSundayStart",
+    "env_var": "PVP_BUILD_SUN_START",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "PVP Schedule",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PVPBuildingDamageTimeThursdayEnd",
+    "env_var": "PVP_BUILD_THU_END",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "PVP Schedule",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PVPBuildingDamageTimeThursdayStart",
+    "env_var": "PVP_BUILD_THU_START",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "PVP Schedule",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PVPBuildingDamageTimeTuesdayEnd",
+    "env_var": "PVP_BUILD_TUE_END",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "PVP Schedule",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PVPBuildingDamageTimeTuesdayStart",
+    "env_var": "PVP_BUILD_TUE_START",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "PVP Schedule",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PVPBuildingDamageTimeWednesdayEnd",
+    "env_var": "PVP_BUILD_WED_END",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "PVP Schedule",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PVPBuildingDamageTimeWednesdayStart",
+    "env_var": "PVP_BUILD_WED_START",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "PVP Schedule",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PVPEnabled",
+    "env_var": "PVP_ENABLED",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Combat Mode",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PVPEnabledFriday",
+    "env_var": null,
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "PVP Schedule",
+    "present_on_live": true,
+    "sources": [
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PVPEnabledMonday",
+    "env_var": null,
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "PVP Schedule",
+    "present_on_live": true,
+    "sources": [
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PVPEnabledSaturday",
+    "env_var": null,
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "PVP Schedule",
+    "present_on_live": true,
+    "sources": [
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PVPEnabledSunday",
+    "env_var": null,
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "PVP Schedule",
+    "present_on_live": true,
+    "sources": [
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PVPEnabledThursday",
+    "env_var": null,
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "PVP Schedule",
+    "present_on_live": true,
+    "sources": [
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PVPEnabledTuesday",
+    "env_var": null,
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "PVP Schedule",
+    "present_on_live": true,
+    "sources": [
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PVPEnabledWednesday",
+    "env_var": null,
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "PVP Schedule",
+    "present_on_live": true,
+    "sources": [
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PvPMountEnduranceDamageMultiplier",
+    "env_var": "PVP_MOUNT_ENDURANCE_DAMAGE",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Combat and Damage",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PVPTimeFridayEnd",
+    "env_var": "PVP_TIME_FRI_END",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "PVP Schedule",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PVPTimeFridayStart",
+    "env_var": "PVP_TIME_FRI_START",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "PVP Schedule",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PVPTimeMondayEnd",
+    "env_var": "PVP_TIME_MON_END",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "PVP Schedule",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PVPTimeMondayStart",
+    "env_var": "PVP_TIME_MON_START",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "PVP Schedule",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PVPTimeSaturdayEnd",
+    "env_var": "PVP_TIME_SAT_END",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "PVP Schedule",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PVPTimeSaturdayStart",
+    "env_var": "PVP_TIME_SAT_START",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "PVP Schedule",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PVPTimeSundayEnd",
+    "env_var": "PVP_TIME_SUN_END",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "PVP Schedule",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PVPTimeSundayStart",
+    "env_var": "PVP_TIME_SUN_START",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "PVP Schedule",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PVPTimeThursdayEnd",
+    "env_var": "PVP_TIME_THU_END",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "PVP Schedule",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PVPTimeThursdayStart",
+    "env_var": "PVP_TIME_THU_START",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "PVP Schedule",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PVPTimeTuesdayEnd",
+    "env_var": "PVP_TIME_TUE_END",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "PVP Schedule",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PVPTimeTuesdayStart",
+    "env_var": "PVP_TIME_TUE_START",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "PVP Schedule",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PVPTimeWednesdayEnd",
+    "env_var": "PVP_TIME_WED_END",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "PVP Schedule",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "PVPTimeWednesdayStart",
+    "env_var": "PVP_TIME_WED_START",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "PVP Schedule",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "RegionAllowAfrica",
+    "env_var": "REGION_ALLOW_AFRICA",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Advanced Present Only",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "RegionAllowAsia",
+    "env_var": "REGION_ALLOW_ASIA",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Advanced Present Only",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "RegionAllowCentralEurope",
+    "env_var": "REGION_ALLOW_CENTRAL_EUROPE",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Advanced Present Only",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "RegionAllowEasternEurope",
+    "env_var": "REGION_ALLOW_EASTERN_EUROPE",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Advanced Present Only",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "RegionAllowNorthAmerica",
+    "env_var": "REGION_ALLOW_NORTH_AMERICA",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Advanced Present Only",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "RegionAllowOceania",
+    "env_var": "REGION_ALLOW_OCEANIA",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Advanced Present Only",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "RegionAllowSouthAmerica",
+    "env_var": "REGION_ALLOW_SOUTH_AMERICA",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Advanced Present Only",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "RegionAllowWesternEurope",
+    "env_var": "REGION_ALLOW_WESTERN_EUROPE",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Advanced Present Only",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "RegionBlockList",
+    "env_var": "REGION_BLOCK_LIST",
+    "type": "string",
+    "ini_style": "string",
+    "group": "Advanced Present Only",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "ResourceRespawnSpeedMultiplier",
+    "env_var": "RESOURCE_RESPAWN",
+    "type": "float",
+    "ini_style": "float",
+    "group": "Harvest and Crafting",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "RestrictAvatarSummoningTime",
+    "env_var": "RESTRICT_AVATAR_TIME",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Avatars",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "RestrictPurgeTime",
+    "env_var": "RESTRICT_PURGE_TIME",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Purge",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "RestrictPVPBuildingDamageTime",
+    "env_var": "RESTRICT_PVP_BUILDING_DAMAGE_TIME",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "PVP Schedule",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "RestrictPVPTime",
+    "env_var": "RESTRICT_PVP_TIME",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "PVP Schedule",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "ServerCommunity",
+    "env_var": "SERVER_COMMUNITY",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Access and Security",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "ServerMergeDestination",
+    "env_var": null,
+    "type": "string",
+    "ini_style": "string",
+    "group": "Advanced Present Only",
+    "present_on_live": true,
+    "sources": [
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "ServerMergeOutgoingTime",
+    "env_var": null,
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Advanced Present Only",
+    "present_on_live": true,
+    "sources": [
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "ServerMessageOfTheDay",
+    "env_var": "SERVER_MOTD",
+    "type": "text",
+    "ini_style": "string",
+    "group": "Access and Security",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "ServerModList",
+    "env_var": "SERVER_MOD_LIST",
+    "type": "string",
+    "ini_style": "string",
+    "group": "Mods",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "ServerPassword",
+    "env_var": "SERVER_PASSWORD",
+    "type": "password",
+    "ini_style": "string",
+    "group": "Access and Security",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "serverRegion",
+    "env_var": "SERVER_REGION",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Access and Security",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "ServerRetirementTime",
+    "env_var": null,
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Advanced Present Only",
+    "present_on_live": true,
+    "sources": [
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "ServerTransferEnabled",
+    "env_var": null,
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Advanced Present Only",
+    "present_on_live": true,
+    "sources": [
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "ServerTransferServersWhitelist",
+    "env_var": null,
+    "type": "string",
+    "ini_style": "string",
+    "group": "Advanced Present Only",
+    "present_on_live": true,
+    "sources": [
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "serverVoiceChat",
+    "env_var": "VOICE_CHAT",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Chat and Social",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "ShieldDurabilityMultiplier",
+    "env_var": "SHIELD_DURABILITY",
+    "type": "float",
+    "ini_style": "float",
+    "group": "Harvest and Crafting",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "ShowOnlinePlayers",
+    "env_var": "SHOW_ONLINE_PLAYERS",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Chat and Social",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "StabilityLossMultiplier",
+    "env_var": "STABILITY_LOSS",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Building and Land Claim",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "StaminaExhaustionTime",
+    "env_var": "STAMINA_EXHAUSTION_TIME",
+    "type": "float",
+    "ini_style": "float",
+    "group": "Player Survival",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "StaminaMovingRegenRateMultiplier",
+    "env_var": "STAMINA_MOVING_REGEN",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Player Survival",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "StaminaOnConsumeRegenPause",
+    "env_var": "STAMINA_CONSUME_PAUSE",
+    "type": "float",
+    "ini_style": "float",
+    "group": "Player Survival",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "StaminaOnExhaustionRegenPause",
+    "env_var": "STAMINA_EXHAUSTION_PAUSE",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Player Survival",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "StaminaRegenerationTime",
+    "env_var": "STAMINA_REGEN_TIME",
+    "type": "float",
+    "ini_style": "float",
+    "group": "Player Survival",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "StaminaStaticRegenRateMultiplier",
+    "env_var": "STAMINA_STATIC_REGEN",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Player Survival",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "StarvationDamagePenaltyCap",
+    "env_var": "STARVATION_DAMAGE_CAP",
+    "type": "float",
+    "ini_style": "float",
+    "group": "Combat and Damage",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "StarvationTimeInMinutes",
+    "env_var": "STARVATION_TIME",
+    "type": "float",
+    "ini_style": "float",
+    "group": "Player Survival",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "StructureDamageMultiplier",
+    "env_var": "STRUCTURE_DAMAGE",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Combat and Damage",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "StructureHealthMultiplier",
+    "env_var": "STRUCTURE_HEALTH",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Combat and Damage",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "ThrallConversionMultiplier",
+    "env_var": "THRALL_CONVERSION",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Thralls and Followers",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "ThrallCorruptionRemovalMultiplier",
+    "env_var": "THRALL_CORRUPTION_REMOVAL",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Player Survival",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "ThrallCraftingTimeMultiplier",
+    "env_var": "THRALL_CRAFTING_TIME",
+    "type": "float",
+    "ini_style": "float",
+    "group": "Harvest and Crafting",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "ThrallDamageToNPCsMultiplier",
+    "env_var": "THRALL_DAMAGE_TO_NPCS",
+    "type": "float",
+    "ini_style": "float",
+    "group": "Combat and Damage",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "ThrallDamageToPlayersMultiplier",
+    "env_var": "THRALL_DAMAGE_TO_PLAYERS",
+    "type": "float",
+    "ini_style": "float",
+    "group": "Combat and Damage",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "ThrallDecayTime",
+    "env_var": "THRALL_DECAY_TIME",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Building and Land Claim",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "ThrallExclusionRadius",
+    "env_var": "THRALL_EXCLUSION_RADIUS",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Thralls and Followers",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "ThrallMinDistanceAwayFromHome",
+    "env_var": "THRALL_MIN_DISTANCE",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Thralls and Followers",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "ThrallScoutingTimeMinutes",
+    "env_var": "THRALL_SCOUTING_TIME",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Thralls and Followers",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "ThrallTeleportingCooldown",
+    "env_var": "THRALL_TELEPORT_COOLDOWN",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Thralls and Followers",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "ThrallWakeupTime",
+    "env_var": "THRALL_WAKEUP_TIME",
+    "type": "float",
+    "ini_style": "float",
+    "group": "Thralls and Followers",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "UnconsciousTimeSeconds",
+    "env_var": "UNCONSCIOUS_TIME",
+    "type": "integer",
+    "ini_style": "int",
+    "group": "Advanced Present Only",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "UseClientCatchUpTime",
+    "env_var": "USE_CATCHUP_TIME",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Day Night and World",
+    "present_on_live": false,
+    "sources": [
+      "balnaimi-configure-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "UseLocalQuadraticAngularVelocityPrediction",
+    "env_var": null,
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Advanced Present Only",
+    "present_on_live": true,
+    "sources": [
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "UseMinionPopulationLimit",
+    "env_var": "USE_MINION_POP_LIMIT",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Thralls and Followers",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "ValidatePhysNavWalkWithRaycast",
+    "env_var": null,
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Advanced Present Only",
+    "present_on_live": true,
+    "sources": [
+      "live-server"
+    ]
+  },
+  {
+    "file": "ServerSettings.ini",
+    "section": "ServerSettings",
+    "ini_key": "ValidatePlayerStats",
+    "env_var": "VALIDATE_PLAYER_STATS",
+    "type": "boolean",
+    "ini_style": "TrueFalse",
+    "group": "Advanced Present Only",
+    "present_on_live": true,
+    "sources": [
+      "balnaimi-configure-server",
+      "live-server"
+    ]
+  }
+]
