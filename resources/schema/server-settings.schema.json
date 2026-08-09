@@ -194,7 +194,8 @@
   "egg_managed_ini_keys": [],
   "read_only_ini_keys": [
     "ConfigVersion",
-    "BlueprintConfigVersion"
+    "BlueprintConfigVersion",
+    "ServerModList"
   ],
   "fields": [
     {
@@ -5506,7 +5507,7 @@
       "type": "string",
       "group": "Mods",
       "label": "Server mod list",
-      "help": "Mod load list: Workshop IDs or modlist.txt (use Conan Mods page).",
+      "help": "Managed exclusively by the Conan Mods page (load order + modlist.txt). Do not edit here \u2014 use Conan Mods to avoid desync.",
       "env_var": "SERVER_MOD_LIST",
       "default": null,
       "sources": [
@@ -5515,10 +5516,10 @@
       ],
       "present_on_live": true,
       "live_value": "",
-      "editable": true,
+      "editable": false,
       "egg_managed": false,
       "ini_style": "string",
-      "read_only": false,
+      "read_only": true,
       "sensitivity": "normal"
     },
     {

@@ -70,6 +70,12 @@ class ConanModsPage extends Page
 
     public string $osHint = 'linux';
 
+    public bool $discoveredFromDisk = false;
+
+    public string $discoveryNote = '';
+
+    public bool $discoveryNotified = false;
+
     /** @var list<string> */
     public array $workshopIds = [];
 
@@ -178,6 +184,14 @@ class ConanModsPage extends Page
         $this->refreshPowerState($stateService, $server);
         $this->reloadFromServer($modList, $workshop);
         $this->refreshInstallStatus(app(ConanWorkshopInstallService::class));
+        if ($this->discoveredFromDisk && $this->discoveryNote !== '' && ! $this->discoveryNotified) {
+            $this->discoveryNotified = true;
+            Notification::make()
+                ->title('Existing mods discovered on disk')
+                ->body($this->discoveryNote.' With the server stopped, click Save load order once to persist the panel manifest — other ServerSettings are left alone.')
+                ->info()
+                ->send();
+        }
     }
 
     public function reloadFromServer(?ConanModListService $modList = null, ?SteamWorkshopService $workshop = null): void
@@ -196,6 +210,8 @@ class ConanModsPage extends Page
             $this->configPlatform = (string) ($info['config_platform'] ?? 'LinuxServer');
             $this->configPlatformSource = (string) ($info['config_platform_source'] ?? '');
             $this->osHint = (string) ($info['os_hint'] ?? 'linux');
+            $this->discoveredFromDisk = (bool) ($info['discovered_from_disk'] ?? false);
+            $this->discoveryNote = (string) ($info['discovery_note'] ?? '');
             $this->paksOnDisk = $info['paks_on_disk'];
             $this->orphanPaks = array_values($info['orphan_paks'] ?? []);
             $this->modlistEntries = $info['modlist_entries'];
@@ -208,6 +224,7 @@ class ConanModsPage extends Page
             $this->bulkImport = implode("\n", $this->workshopIds);
             $this->uncacheForm();
             $this->fillFormState();
+
         } catch (Throwable $e) {
             report($e);
             Notification::make()->title('Could not load mod list')->body($e->getMessage())->danger()->send();
@@ -230,6 +247,13 @@ class ConanModsPage extends Page
                             .($this->configPlatformSource !== '' ? ' ('.$this->configPlatformSource.')' : ''))
                         ->disabled()
                         ->dehydrated(false),
+                    TextInput::make('discoveryNote')
+                        ->label('Disk discovery')
+                        ->formatStateUsing(fn () => $this->discoveryNote !== '' ? $this->discoveryNote : '—')
+                        ->visible(fn (): bool => $this->discoveredFromDisk || $this->discoveryNote !== '')
+                        ->disabled()
+                        ->dehydrated(false)
+                        ->columnSpanFull(),
                     TextInput::make('paksSummary')
                         ->label('Paks on disk (Mods/)')
                         ->formatStateUsing(function (): string {
@@ -449,9 +473,24 @@ class ConanModsPage extends Page
                 ->icon('tabler-player-play')
                 ->color('success')
                 ->visible(fn (): bool => $this->isSafeToEdit)
+                ->disabled(fn (): bool => $this->installInProgress || $this->installQueueDepth > 0)
                 ->authorize(fn (): bool => (bool) user()?->can(SubuserPermission::ControlStart, Filament::getTenant()))
                 ->requiresConfirmation()
-                ->action(fn () => $this->sendPowerAction('start')),
+                ->modalDescription(fn (): string => ($this->installInProgress || $this->installQueueDepth > 0)
+                    ? 'A Workshop install is still queued or running. Wait for it to finish before starting the game server.'
+                    : 'Start the Conan server process?')
+                ->action(function (): void {
+                    if ($this->installInProgress || $this->installQueueDepth > 0) {
+                        Notification::make()
+                            ->title('Cannot start while Workshop install is active')
+                            ->body('Wait for the download queue to finish (queue depth '.$this->installQueueDepth.').')
+                            ->warning()
+                            ->send();
+
+                        return;
+                    }
+                    $this->sendPowerAction('start');
+                }),
         ];
     }
 
@@ -530,6 +569,15 @@ class ConanModsPage extends Page
         $raw = str_replace(["\r\n", "\r"], "\n", $raw);
         $parts = preg_split('/[\n,]+/', $raw) ?: [];
         $ids = app(ConanModListService::class)->normalizeIdList($parts);
+        if ($ids === [] && $this->savedWorkshopIds !== []) {
+            Notification::make()
+                ->title('Empty bulk replace blocked')
+                ->body('Refusing to replace the load order with an empty list while mods are configured. Clear mods one-by-one or type a confirmed empty import after removing all IDs deliberately.')
+                ->danger()
+                ->send();
+
+            return;
+        }
         $this->workshopIds = $ids;
         $this->metaById = app(SteamWorkshopService::class)->getDetails($ids);
         $this->afterListMutation('Bulk list set ('.count($ids).' mods)', 'bulk');
@@ -599,6 +647,17 @@ class ConanModsPage extends Page
 
     private function afterListMutation(string $summary, string $source = 'manual'): void
     {
+        if ($this->installInProgress || $this->installQueueDepth > 0) {
+            Notification::make()
+                ->title('Workshop install in progress')
+                ->body('Wait for the download queue to finish before changing the load order (prevents races with the worker).')
+                ->warning()
+                ->send();
+            $this->reloadFromServer();
+
+            return;
+        }
+
         $this->isDirty = $this->workshopIds !== $this->savedWorkshopIds;
         $this->bulkImport = implode("\n", $this->workshopIds);
         $this->uncacheForm();
@@ -947,6 +1006,7 @@ class ConanModsPage extends Page
                 'settingsPath' => $this->settingsPath,
                 'configPlatform' => $this->configPlatform
                     .($this->configPlatformSource !== '' ? ' ('.$this->configPlatformSource.')' : ''),
+                'discoveryNote' => $this->discoveryNote !== '' ? $this->discoveryNote : '—',
                 'paksSummary' => $this->formatPaksSummary(),
                 'orphanPaksList' => implode("\n", $this->orphanPaks),
                 'modlistPreview' => $this->modlistPreview !== ''

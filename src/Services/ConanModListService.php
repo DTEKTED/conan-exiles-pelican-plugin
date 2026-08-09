@@ -57,7 +57,6 @@ class ConanModListService
             $rawList = (string) ($parsed['sections']['ServerSettings']['ServerModList']
                 ?? $parsed['typed']['ServerModList']
                 ?? '');
-            // typed may have transformed; prefer raw section map
             foreach ($parsed['sections'] as $section => $pairs) {
                 if (array_key_exists('ServerModList', $pairs)) {
                     $rawList = (string) $pairs['ServerModList'];
@@ -76,26 +75,52 @@ class ConanModListService
         }
 
         $paks = $this->listPaks($server);
-
-        // If ServerModList is a filename, we only have pak order from modlist.txt
-        // Workshop IDs may still be in our manifest
         $manifest = $this->readManifest($server);
-        if ($mode !== 'ids' && $ids === [] && $manifest['entries'] !== []) {
-            $ids = array_values(array_filter(array_map(
-                static fn (array $e): string => (string) ($e['workshop_id'] ?? ''),
-                $manifest['entries']
-            )));
+        $workshopIndex = $this->buildWorkshopPakIndex($server);
+
+        // Discover / heal load order from disk when not purely ID-list mode,
+        // or when ID-list is empty but mods already exist outside the panel.
+        $discovery = $this->discoverLoadOrder(
+            $ids,
+            $mode,
+            $manifest,
+            $modlistEntries,
+            $paks,
+            $workshopIndex,
+        );
+        $ids = $discovery['workshop_ids'];
+        $pakById = $discovery['pak_by_id'];
+
+        // Rebuild a view-manifest so mount status has pak names even if file was incomplete.
+        $viewManifest = $manifest;
+        if ($pakById !== []) {
+            $entries = [];
+            foreach ($ids as $i => $id) {
+                $entries[] = [
+                    'order' => $i,
+                    'workshop_id' => $id,
+                    'pak_name' => $pakById[$id] ?? null,
+                    'enabled' => true,
+                    'source' => $discovery['sources'][$id] ?? 'unknown',
+                ];
+            }
+            $viewManifest = [
+                'version' => (int) ($manifest['version'] ?? 1),
+                'entries' => $entries,
+                'discovered' => (bool) ($discovery['discovered'] ?? false),
+            ];
         }
 
         $managed = [];
-        foreach ($manifest['entries'] ?? [] as $entry) {
-            if (is_array($entry) && ! empty($entry['pak_name'])) {
-                $managed[(string) $entry['pak_name']] = true;
+        foreach ($pakById as $pak) {
+            if (is_string($pak) && $pak !== '') {
+                $managed[$pak] = true;
             }
         }
         foreach ($modlistEntries as $entry) {
-            if (! empty($entry['pak_name']) && ($entry['enabled'] ?? true)) {
-                $managed[(string) $entry['pak_name']] = true;
+            $pak = $this->normalizePakBasename($entry['pak_name'] ?? null);
+            if ($pak !== null && ($entry['enabled'] ?? true)) {
+                $managed[$pak] = true;
             }
         }
         $orphans = [];
@@ -107,10 +132,10 @@ class ConanModListService
 
         $mountedFromLog = $this->parseMountedPaksFromLog($server);
         $extractInfo = $this->listExtractedServerStems($server);
-        $extractedStems = $extractInfo['stems'];
         $platformInfo = app(ConanConfigPlatformService::class)->resolve($server);
-        // Soft mount warnings while stopped: ExtractedMods can exist from older boots,
-        // so missing extract is not meaningful until the server has run again.
+        $plat = (string) $platformInfo['platform'];
+        $extractedStems = $extractInfo['by_platform'][$plat]
+            ?? $extractInfo['stems'];
         $serverIsStopped = true;
         try {
             $serverIsStopped = app(PelicanServerStateService::class)->isSafeToEdit($server);
@@ -119,7 +144,7 @@ class ConanModListService
         }
         $mountStatus = $this->buildMountStatus(
             $ids,
-            $manifest,
+            $viewManifest,
             $modlistEntries,
             $paks,
             $mountedFromLog,
@@ -141,7 +166,10 @@ class ConanModListService
             'config_platform' => (string) $platformInfo['platform'],
             'config_platform_source' => (string) $platformInfo['source'],
             'os_hint' => (string) $platformInfo['os_hint'],
-            'manifest' => $manifest,
+            'manifest' => $viewManifest,
+            'discovered_from_disk' => (bool) ($discovery['discovered'] ?? false),
+            'discovery_note' => (string) ($discovery['note'] ?? ''),
+            'pak_by_id' => $pakById,
             'mount_status' => $mountStatus,
             'extracted_by_platform' => $extractInfo['by_platform'],
             'mounted_paks_from_log' => $mountedFromLog,
@@ -156,7 +184,15 @@ class ConanModListService
      *
      * @param  list<string>  $workshopIds
      */
-    public function saveWorkshopOrder(mixed $server, array $workshopIds, bool $ensureServerModListPointsToIds = true): void
+    /**
+     * Write ordered workshop IDs and sync modlist/manifest.
+     *
+     * Does not wipe externally installed paks that were never in the load order.
+     * Only deletes .pak files for Workshop IDs explicitly removed from a previous list.
+     *
+     * @param  list<string>  $workshopIds
+     */
+    public function saveWorkshopOrder(mixed $server, array $workshopIds, bool $allowEmpty = false): void
     {
         $ids = $this->normalizeIdList($workshopIds);
         $settingsPath = $this->files->resolveExistingPath(
@@ -168,31 +204,73 @@ class ConanModListService
             throw new \RuntimeException('ServerSettings.ini not found');
         }
 
-        $contents = $this->files->read($server, $settingsPath);
+        $paksOnDisk = $this->listPaks($server);
         $existingManifest = $this->readManifest($server);
+        $workshopIndex = $this->buildWorkshopPakIndex($server);
+
+        $previousIds = [];
         $pakById = [];
         foreach ($existingManifest['entries'] ?? [] as $entry) {
             if (! is_array($entry)) {
                 continue;
             }
             $wid = (string) ($entry['workshop_id'] ?? '');
-            $pak = (string) ($entry['pak_name'] ?? '');
-            if ($wid !== '' && $pak !== '') {
+            $pak = $this->normalizePakBasename($entry['pak_name'] ?? null);
+            if ($wid !== '') {
+                $previousIds[$wid] = true;
+                if ($pak !== null) {
+                    $pakById[$wid] = $pak;
+                }
+            }
+        }
+        // Enrich pak map from Workshop content + on-disk paks (external installs).
+        foreach ($ids as $id) {
+            if (! empty($pakById[$id])) {
+                continue;
+            }
+            $fromIndex = $workshopIndex['by_id'][$id] ?? [];
+            foreach ($fromIndex as $pak) {
+                if (in_array($pak, $paksOnDisk, true)) {
+                    $pakById[$id] = $pak;
+                    break;
+                }
+            }
+            if (empty($pakById[$id]) && $fromIndex !== []) {
+                $pakById[$id] = $fromIndex[0];
+            }
+        }
+        foreach ($paksOnDisk as $pak) {
+            $wid = $workshopIndex['by_pak'][$pak] ?? null;
+            if (is_string($wid) && $wid !== '' && empty($pakById[$wid]) && in_array($wid, $ids, true)) {
                 $pakById[$wid] = $pak;
             }
         }
 
-        // Prefer modlist.txt mode once paks/modlist exist so the engine loads files.
-        $useModlistFile = $this->files->exists($server, self::MODLIST_PATH)
-            || $this->listPaks($server) !== []
-            || $pakById !== [];
+        if ($ids === [] && ! $allowEmpty) {
+            if ($previousIds !== [] || $paksOnDisk !== []) {
+                throw new \RuntimeException(
+                    'Refusing to save an empty load order while mods exist on disk or in the previous list. '
+                    .'Import/discover existing mods first, or use an explicit empty replace.'
+                );
+            }
+        }
 
+        $mappedOnDisk = 0;
+        foreach ($ids as $id) {
+            $pak = $pakById[$id] ?? null;
+            if (is_string($pak) && $pak !== '' && in_array($pak, $paksOnDisk, true)) {
+                $mappedOnDisk++;
+            }
+        }
+
+        // Only point ServerModList at modlist.txt when at least one real *pak line will load.
+        $useModlistFile = $mappedOnDisk > 0;
         $value = $useModlistFile ? 'modlist.txt' : implode(',', $ids);
+
+        $contents = $this->files->read($server, $settingsPath);
         $updated = $this->mapper->merge($contents, [
             'ServerModList' => $value,
         ], 'ServerSettings.ini');
-
-        // mapper may type-coerce; force raw string write via parse/sections for this key
         $parsed = $this->mapper->parse($updated, 'ServerSettings.ini');
         $section = 'ServerSettings';
         $parsed['sections'][$section]['ServerModList'] = $value;
@@ -215,25 +293,13 @@ class ConanModListService
             'version' => 1,
             'updated_at' => gmdate('c'),
             'entries' => $entries,
-        ]);
+        ], failHard: true);
 
         if ($useModlistFile) {
             $this->writeModlistFromIds($server, $ids, $pakById);
         }
 
-        // Only delete paks that belonged to Workshop IDs *removed* from the load order.
-        // Never wipe "unknown" paks or siblings when a partial download/manifest is mid-flight —
-        // that previously deleted other mods when install jobs rewrote a single-id list.
-        $previousIds = [];
-        foreach ($existingManifest['entries'] ?? [] as $entry) {
-            if (! is_array($entry)) {
-                continue;
-            }
-            $wid = (string) ($entry['workshop_id'] ?? '');
-            if ($wid !== '') {
-                $previousIds[$wid] = true;
-            }
-        }
+        // Only delete paks for IDs explicitly removed from a known previous load order.
         $kept = array_fill_keys($ids, true);
         $toDelete = [];
         foreach ($existingManifest['entries'] ?? [] as $entry) {
@@ -241,8 +307,8 @@ class ConanModListService
                 continue;
             }
             $wid = (string) ($entry['workshop_id'] ?? '');
-            $pak = (string) ($entry['pak_name'] ?? '');
-            if ($wid === '' || $pak === '' || ! str_ends_with(strtolower($pak), '.pak')) {
+            $pak = $this->normalizePakBasename($entry['pak_name'] ?? null);
+            if ($wid === '' || $pak === null) {
                 continue;
             }
             if (! isset($kept[$wid])) {
@@ -270,14 +336,15 @@ class ConanModListService
         ];
         $paksOnDisk = array_fill_keys($this->listPaks($server), true);
         foreach ($ids as $id) {
-            $pak = $pakById[$id] ?? null;
-            if ($pak === null || $pak === '') {
-                // Keep order visible in UI/file even before Workshop download.
+            $pak = $this->normalizePakBasename($pakById[$id] ?? null);
+            if ($pak === null) {
                 $lines[] = '# pending workshop '.$id.' (no .pak yet — run Download Workshop paks)';
                 continue;
             }
-            if ($paksOnDisk !== [] && ! isset($paksOnDisk[$pak])) {
-                $lines[] = '# *'.$pak.'  (listed but file not on disk yet)';
+            if (! isset($paksOnDisk[$pak])) {
+                // Never emit a live *pak line for a missing file (engine would fail to load).
+                $lines[] = '# pending workshop '.$id.' (expected '.$pak.' — not on disk yet)';
+                continue;
             }
             $lines[] = '*'.$pak;
         }
@@ -422,7 +489,14 @@ class ConanModListService
      */
     public function purgeOrphanPaks(mixed $server): array
     {
-        $orphans = $this->orphanPaks($server);
+        $info = $this->inspect($server);
+        if (($info['workshop_ids'] ?? []) === [] && ($info['paks_on_disk'] ?? []) !== []) {
+            throw new \RuntimeException(
+                'Refusing to purge orphans: load order is empty but .pak files exist. '
+                .'Discover/import mods into the load order first so managed paks are not treated as orphans.'
+            );
+        }
+        $orphans = $info['orphan_paks'] ?? $this->orphanPaks($server);
         $deleted = $this->deletePaks($server, $orphans);
         if ($deleted !== []) {
             $this->deleteExtractedCaches($server, $deleted);
@@ -835,14 +909,15 @@ class ConanModListService
                 $enabled = false;
                 $trim = ltrim(substr($trim, 1));
             }
-            $pak = $trim;
-            if (str_starts_with($pak, '*')) {
-                $pak = substr($pak, 1);
+            $pakRaw = $trim;
+            if (str_starts_with($pakRaw, '*')) {
+                $pakRaw = substr($pakRaw, 1);
             }
+            $pak = $this->normalizePakBasename($pakRaw);
             $entries[] = [
                 'line' => $line,
                 'enabled' => $enabled,
-                'pak_name' => $pak !== '' ? $pak : null,
+                'pak_name' => $pak,
             ];
         }
 
@@ -896,15 +971,251 @@ class ConanModListService
     }
 
     /** @param  array<string, mixed>  $manifest */
-    public function writeManifest(mixed $server, array $manifest): void
+    public function writeManifest(mixed $server, array $manifest, bool $failHard = false): void
     {
         $json = json_encode($manifest, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)."\n";
         try {
-            // ensure Mods dir exists by writing the file (Wings may create parents)
             $this->files->write($server, self::MANIFEST_PATH, $json);
         } catch (\Throwable $e) {
-            // non-fatal for M1 ID-list mode
             report($e);
+            if ($failHard) {
+                throw new \RuntimeException('Failed to write mod manifest: '.$e->getMessage(), 0, $e);
+            }
         }
+    }
+
+    /**
+     * Map Workshop content on the volume: workshop id ↔ pak basenames.
+     *
+     * @return array{by_id: array<string, list<string>>, by_pak: array<string, string>}
+     */
+    public function buildWorkshopPakIndex(mixed $server): array
+    {
+        $byId = [];
+        $byPak = [];
+        $roots = [
+            'steamapps/workshop/content/440900',
+            'Steam/steamapps/workshop/content/440900',
+        ];
+        $repo = app(\App\Repositories\Daemon\DaemonFileRepository::class)->setServer($server);
+        foreach ($roots as $root) {
+            try {
+                $entries = $repo->getDirectory($root);
+            } catch (\Throwable) {
+                continue;
+            }
+            if (! is_iterable($entries)) {
+                continue;
+            }
+            foreach ($entries as $entry) {
+                $name = (string) data_get($entry, 'name');
+                $isFile = (bool) data_get($entry, 'file', true);
+                if ($name === '' || $isFile || ! ctype_digit($name)) {
+                    continue;
+                }
+                $wid = $name;
+                $dir = rtrim($root, '/').'/'.$wid;
+                try {
+                    $files = $repo->getDirectory($dir);
+                } catch (\Throwable) {
+                    continue;
+                }
+                if (! is_iterable($files)) {
+                    continue;
+                }
+                foreach ($files as $file) {
+                    $fname = (string) data_get($file, 'name');
+                    if ($fname === '' || ! (bool) data_get($file, 'file', true)) {
+                        continue;
+                    }
+                    if (! str_ends_with(strtolower($fname), '.pak')) {
+                        continue;
+                    }
+                    $byId[$wid] = $byId[$wid] ?? [];
+                    if (! in_array($fname, $byId[$wid], true)) {
+                        $byId[$wid][] = $fname;
+                    }
+                    if (! isset($byPak[$fname])) {
+                        $byPak[$fname] = $wid;
+                    }
+                }
+            }
+        }
+
+        return ['by_id' => $byId, 'by_pak' => $byPak];
+    }
+
+    /**
+     * Build ordered workshop IDs from INI / manifest / modlist / on-disk paks.
+     *
+     * @param  list<string>  $seedIds
+     * @param  array{version?: int, entries?: list<array<string, mixed>>}  $manifest
+     * @param  list<array{line: string, enabled: bool, pak_name: ?string}>  $modlistEntries
+     * @param  list<string>  $paks
+     * @param  array{by_id: array<string, list<string>>, by_pak: array<string, string>}  $workshopIndex
+     * @return array{
+     *   workshop_ids: list<string>,
+     *   pak_by_id: array<string, string>,
+     *   sources: array<string, string>,
+     *   discovered: bool,
+     *   note: string
+     * }
+     */
+    public function discoverLoadOrder(
+        array $seedIds,
+        string $mode,
+        array $manifest,
+        array $modlistEntries,
+        array $paks,
+        array $workshopIndex,
+    ): array {
+        $ids = [];
+        $pakById = [];
+        $sources = [];
+        $discovered = false;
+        $notes = [];
+
+        $add = function (string $id, ?string $pak, string $source) use (&$ids, &$pakById, &$sources): void {
+            if ($id === '' || ! ctype_digit($id)) {
+                return;
+            }
+            if (! in_array($id, $ids, true)) {
+                $ids[] = $id;
+            }
+            $pak = $this->normalizePakBasename($pak);
+            if ($pak !== null && empty($pakById[$id])) {
+                $pakById[$id] = $pak;
+            }
+            $sources[$id] = $sources[$id] ?? $source;
+        };
+
+        foreach ($seedIds as $id) {
+            $add((string) $id, null, 'server_mod_list');
+        }
+
+        foreach ($manifest['entries'] ?? [] as $entry) {
+            if (! is_array($entry)) {
+                continue;
+            }
+            $wid = (string) ($entry['workshop_id'] ?? '');
+            $pak = $entry['pak_name'] ?? null;
+            $add($wid, is_string($pak) ? $pak : null, 'manifest');
+        }
+
+        // modlist.txt order is authoritative for filename mode when present.
+        $modlistOrder = [];
+        foreach ($modlistEntries as $entry) {
+            if (! ($entry['enabled'] ?? true)) {
+                continue;
+            }
+            $pak = $this->normalizePakBasename($entry['pak_name'] ?? null);
+            if ($pak === null) {
+                continue;
+            }
+            $wid = $workshopIndex['by_pak'][$pak] ?? null;
+            if ($wid === null) {
+                foreach ($manifest['entries'] ?? [] as $me) {
+                    if (! is_array($me)) {
+                        continue;
+                    }
+                    if ($this->normalizePakBasename($me['pak_name'] ?? null) === $pak) {
+                        $wid = (string) ($me['workshop_id'] ?? '');
+                        break;
+                    }
+                }
+            }
+            if (is_string($wid) && $wid !== '' && ctype_digit($wid)) {
+                $modlistOrder[] = $wid;
+                $add($wid, $pak, 'modlist');
+            }
+        }
+
+        // Prefer modlist order when ServerModList points at a file.
+        if ($mode === 'filename' && $modlistOrder !== []) {
+            $ids = [];
+            foreach ($modlistOrder as $wid) {
+                if (! in_array($wid, $ids, true)) {
+                    $ids[] = $wid;
+                }
+            }
+            // Keep any seed/manifest IDs not in modlist (pending downloads) after.
+            foreach ($seedIds as $id) {
+                $id = (string) $id;
+                if ($id !== '' && ! in_array($id, $ids, true)) {
+                    $ids[] = $id;
+                }
+            }
+            foreach ($manifest['entries'] ?? [] as $entry) {
+                $wid = (string) (is_array($entry) ? ($entry['workshop_id'] ?? '') : '');
+                if ($wid !== '' && ! in_array($wid, $ids, true)) {
+                    $ids[] = $wid;
+                }
+            }
+        }
+
+        // Disk paks not yet in list: reverse-map via Workshop content (external installs).
+        $addedFromDisk = 0;
+        foreach ($paks as $pak) {
+            $wid = $workshopIndex['by_pak'][$pak] ?? null;
+            if (! is_string($wid) || $wid === '' || ! ctype_digit($wid)) {
+                continue;
+            }
+            if (! in_array($wid, $ids, true)) {
+                $add($wid, $pak, 'disk-workshop');
+                $addedFromDisk++;
+                $discovered = true;
+            } elseif (empty($pakById[$wid])) {
+                $pakById[$wid] = $pak;
+            }
+        }
+
+        $hadManifest = false;
+        foreach ($manifest['entries'] ?? [] as $entry) {
+            if (is_array($entry) && (string) ($entry['workshop_id'] ?? '') !== '') {
+                $hadManifest = true;
+                break;
+            }
+        }
+        if ($seedIds === [] && $ids !== [] && ! $hadManifest) {
+            $discovered = true;
+            $notes[] = 'Load order recovered from disk (modlist and/or Workshop content) without a panel manifest.';
+        }
+        if ($addedFromDisk > 0) {
+            $discovered = true;
+            $notes[] = "Discovered {$addedFromDisk} Workshop mod(s) already on disk that were not in the panel list.";
+        }
+        if ($mode === 'filename' && $ids === [] && $paks !== []) {
+            $notes[] = 'ServerModList points at modlist.txt but no Workshop IDs could be resolved — paks listed as orphans. Do not purge until IDs are mapped.';
+        }
+
+        return [
+            'workshop_ids' => $ids,
+            'pak_by_id' => $pakById,
+            'sources' => $sources,
+            'discovered' => $discovered,
+            'note' => implode(' ', $notes),
+        ];
+    }
+
+    public function normalizePakBasename(mixed $pak): ?string
+    {
+        if (! is_string($pak) || $pak === '') {
+            return null;
+        }
+        $pak = trim($pak);
+        // Strip trailing comments / annotations
+        if (str_contains($pak, '#')) {
+            $pak = trim(explode('#', $pak, 2)[0]);
+        }
+        $pak = preg_split('/\s+/', $pak)[0] ?? $pak;
+        if (str_starts_with($pak, '*')) {
+            $pak = substr($pak, 1);
+        }
+        $pak = basename($pak);
+        if ($pak === '' || ! str_ends_with(strtolower($pak), '.pak')) {
+            return null;
+        }
+
+        return $pak;
     }
 }

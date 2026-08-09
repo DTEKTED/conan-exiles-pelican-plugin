@@ -95,27 +95,29 @@ class ConanWorkshopInstallService
                 $pending['download_ids'] ?? $pending['workshop_ids'] ?? []
             ));
 
-            $mergedOrder = $existingOrder;
-            foreach ($loadOrder as $id) {
-                if (! in_array($id, $mergedOrder, true)) {
-                    $mergedOrder[] = $id;
+            // Caller's full load order is authoritative (reorder/remove must win).
+            $mergedOrder = $loadOrder;
+
+            $mergedDownload = [];
+            $added = [];
+            // Keep pending downloads only if still in the load order.
+            foreach ($existingDownload as $id) {
+                if (in_array($id, $mergedOrder, true) && ! in_array($id, $mergedDownload, true)) {
+                    $mergedDownload[] = $id;
                 }
             }
-
-            $mergedDownload = $existingDownload;
-            $added = [];
             foreach ($toDownload as $id) {
+                if (! in_array($id, $mergedOrder, true)) {
+                    continue;
+                }
                 if (! in_array($id, $mergedDownload, true)) {
                     $mergedDownload[] = $id;
                     $added[] = $id;
                 }
-                if (! in_array($id, $mergedOrder, true)) {
-                    $mergedOrder[] = $id;
-                }
             }
 
-            $alreadyQueued = $added === [];
-            if (! $alreadyQueued || $mergedOrder !== $existingOrder) {
+            $alreadyQueued = $added === [] && $mergedOrder === $existingOrder;
+            if (! $alreadyQueued || $mergedOrder !== $existingOrder || $mergedDownload !== $existingDownload) {
                 $pending['workshop_ids'] = $mergedOrder; // full order (worker + UI)
                 $pending['load_order_ids'] = $mergedOrder;
                 $pending['download_ids'] = $mergedDownload;
