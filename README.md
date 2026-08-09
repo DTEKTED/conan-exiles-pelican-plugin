@@ -40,6 +40,23 @@ This plugin does **not** replace Wings, the game egg, SteamCMD install of the ba
 
 ---
 
+## Platform support (Linux primary)
+
+| Platform | Status |
+| --- | --- |
+| **Linux Dedicated** (`LinuxServer/`) | Primary — fully tested on Linux Wings |
+| **Windows Dedicated** (`WindowsServer/`) | Supported in-plugin (v0.6+): path auto-detect, mount/extract patterns, job `os_hint` |
+
+One plugin for both targets (not separate Windows/Linux editions). Override:
+
+```php
+'config_platform' => 'auto', // or LinuxServer | WindowsServer
+```
+
+Windows Workshop worker: optional skeleton script for host operators; production path remains the Linux Docker worker. See lab docs `CONAN_MODS_OPTIONS.md` § R3.
+
+---
+
 ## Manual Installation Guide
 
 ### 1. Copy the plugin into the panel

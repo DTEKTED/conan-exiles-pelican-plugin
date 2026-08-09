@@ -72,9 +72,39 @@ class ConanSettingsSchema
 
     public function pathFallbacks(string $file): array
     {
-        return $this->schema['path_fallbacks'][$file] ?? array_values(array_filter([
+        return $this->rawPathFallbacks($file);
+    }
+
+    /**
+     * Schema-declared fallbacks only (no platform reordering).
+     *
+     * @return list<string>
+     */
+    public function rawPathFallbacks(string $file): array
+    {
+        $listed = $this->schema['path_fallbacks'][$file] ?? null;
+        if (is_array($listed) && $listed !== []) {
+            return array_values(array_filter(array_map('strval', $listed)));
+        }
+
+        return array_values(array_filter([
             $this->pathFor($file),
         ]));
+    }
+
+    /**
+     * Platform-aware ordered candidates for a live server volume.
+     *
+     * @return list<string>
+     */
+    public function pathFallbacksForServer(mixed $server, string $file): array
+    {
+        return app(ConanConfigPlatformService::class)->pathCandidates($server, $file);
+    }
+
+    public function pathForServer(mixed $server, string $file): string
+    {
+        return app(ConanConfigPlatformService::class)->primaryPath($server, $file);
     }
 
     public function groups(): array

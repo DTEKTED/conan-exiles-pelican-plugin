@@ -24,6 +24,14 @@
     "ServerSettings.ini": [
       "ConanSandbox/Saved/Config/LinuxServer/ServerSettings.ini",
       "ConanSandbox/Saved/Config/WindowsServer/ServerSettings.ini"
+    ],
+    "Engine.ini": [
+      "ConanSandbox/Saved/Config/LinuxServer/Engine.ini",
+      "ConanSandbox/Saved/Config/WindowsServer/Engine.ini"
+    ],
+    "Game.ini": [
+      "ConanSandbox/Saved/Config/LinuxServer/Game.ini",
+      "ConanSandbox/Saved/Config/WindowsServer/Game.ini"
     ]
   },
   "primary_file": "ServerSettings.ini",

@@ -42,6 +42,23 @@ class ConanSettingsFileService
     }
 
     /**
+     * Delete files under a directory via Wings (names relative to $root).
+     *
+     * @param  list<string>  $names
+     */
+    public function delete(mixed $server, string $root, array $names): void
+    {
+        $names = array_values(array_filter(array_map(static fn ($n) => basename((string) $n), $names)));
+        if ($names === []) {
+            return;
+        }
+        $response = $this->fileRepository->setServer($server)->deleteFiles($root === '' ? '/' : $root, $names);
+        if ($response->failed()) {
+            throw new Exception('Failed to delete file(s): '.implode(', ', $names));
+        }
+    }
+
+    /**
      * @return array<int, array{name: string, path: string, size: mixed, modified: mixed}>
      */
     public function listBackups(mixed $server, string $settingsPath): array

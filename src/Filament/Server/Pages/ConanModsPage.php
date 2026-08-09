@@ -39,6 +39,13 @@ class ConanModsPage extends Page
     /** When true, add/remove/move/bulk immediately write ServerModList if offline. */
     private const AUTO_SAVE = true;
 
+    /**
+     * When true and the server is stopped, saving the load order automatically queues
+     * SteamCMD Workshop downloads for any IDs that do not yet have a .pak on disk.
+     * Download never requires the game process to be running (and must not run while it is).
+     */
+    private const AUTO_DOWNLOAD_WHEN_OFFLINE = true;
+
     #[Locked]
     public bool $isSafeToEdit = false;
 
@@ -57,6 +64,12 @@ class ConanModsPage extends Page
     #[Locked]
     public string $settingsPath = '';
 
+    public string $configPlatform = 'LinuxServer';
+
+    public string $configPlatformSource = '';
+
+    public string $osHint = 'linux';
+
     /** @var list<string> */
     public array $workshopIds = [];
 
@@ -71,9 +84,24 @@ class ConanModsPage extends Page
     #[Locked]
     public array $paksOnDisk = [];
 
+    /** @var list<string> paks on disk not in current load order */
+    #[Locked]
+    public array $orphanPaks = [];
+
     /** @var list<array{line: string, enabled: bool, pak_name: ?string}> */
     #[Locked]
     public array $modlistEntries = [];
+
+    /** @var list<array<string, mixed>> mount/extract status per workshop id + orphans */
+    #[Locked]
+    public array $mountStatus = [];
+
+    /** @var list<string> */
+    #[Locked]
+    public array $mountedPaksFromLog = [];
+
+    /** Cached modlist.txt preview text for form fill */
+    public string $modlistPreview = '';
 
     public string $addIdInput = '';
 
@@ -89,6 +117,13 @@ class ConanModsPage extends Page
 
     public bool $installInProgress = false;
 
+    /** Number of pending+running install jobs for this server. */
+    public int $installQueueDepth = 0;
+
+    public int $installPendingCount = 0;
+
+    public string $installQueueSummary = 'Queue empty';
+
     /** When true, poll until power state matches expectedSafeToEdit (or timeout). */
     public bool $awaitingPowerSettle = false;
 
@@ -98,6 +133,9 @@ class ConanModsPage extends Page
 
     /** Previous install status for terminal-transition detection. */
     public string $lastNotifiedInstallStatus = '';
+
+    /** Last job id we notified as finished (avoids re-toast when queue advances). */
+    public string $lastNotifiedInstallJobId = '';
 
     public static function canAccess(): bool
     {
@@ -155,8 +193,16 @@ class ConanModsPage extends Page
             $this->serverModListRaw = $info['server_mod_list_raw'];
             $this->serverModListMode = $info['server_mod_list_mode'];
             $this->settingsPath = $info['settings_path'];
+            $this->configPlatform = (string) ($info['config_platform'] ?? 'LinuxServer');
+            $this->configPlatformSource = (string) ($info['config_platform_source'] ?? '');
+            $this->osHint = (string) ($info['os_hint'] ?? 'linux');
             $this->paksOnDisk = $info['paks_on_disk'];
+            $this->orphanPaks = array_values($info['orphan_paks'] ?? []);
             $this->modlistEntries = $info['modlist_entries'];
+            $this->mountStatus = array_values($info['mount_status'] ?? []);
+            $this->mountedPaksFromLog = array_values($info['mounted_paks_from_log'] ?? []);
+            $this->modlistPreview = (string) ($info['modlist_preview']
+                ?? $modList->formatModlistPreview($this->modlistEntries, $this->mountStatus));
             $this->metaById = $workshop->getDetails($this->workshopIds);
             $this->isDirty = false;
             $this->bulkImport = implode("\n", $this->workshopIds);
@@ -178,18 +224,36 @@ class ConanModsPage extends Page
                     TextInput::make('serverModListMode')->label('ServerModList mode')->disabled()->dehydrated(false),
                     TextInput::make('serverModListRaw')->label('ServerModList on disk')->disabled()->dehydrated(false),
                     TextInput::make('settingsPath')->label('Settings path')->disabled()->dehydrated(false),
+                    TextInput::make('configPlatform')
+                        ->label('Config platform')
+                        ->formatStateUsing(fn () => $this->configPlatform
+                            .($this->configPlatformSource !== '' ? ' ('.$this->configPlatformSource.')' : ''))
+                        ->disabled()
+                        ->dehydrated(false),
                     TextInput::make('paksSummary')
                         ->label('Paks on disk (Mods/)')
-                        ->formatStateUsing(fn () => $this->paksOnDisk === []
-                            ? '(none — use Download Workshop paks to install into Mods/)'
-                            : implode(', ', $this->paksOnDisk))
+                        ->formatStateUsing(function (): string {
+                            if ($this->paksOnDisk === []) {
+                                return '(none yet — stop server, add Workshop IDs, Save to auto-download, or use Download missing paks now)';
+                            }
+                            $managed = array_values(array_diff($this->paksOnDisk, $this->orphanPaks));
+                            $parts = [];
+                            if ($managed !== []) {
+                                $parts[] = 'in load order: '.implode(', ', $managed);
+                            }
+                            if ($this->orphanPaks !== []) {
+                                $parts[] = 'ORPHANS (not loaded): '.implode(', ', $this->orphanPaks);
+                            }
+
+                            return implode(' | ', $parts) ?: implode(', ', $this->paksOnDisk);
+                        })
                         ->disabled()
                         ->dehydrated(false),
                 ])
                 ->columns(2),
 
             Section::make('Load order (Workshop IDs)')
-                ->description('Top = loads first. Saved to ServerModList as comma-separated IDs. Clients need the same mods in the same order. Stop the server before saving.')
+                ->description('Top = loads first. With the server stopped, Add & save / Save writes the load order and queues Workshop .pak downloads for missing IDs. Removing a mod also deletes its .pak from Mods/ on save. Orphan paks are not loaded.')
                 ->schema([
                     ViewField::make('mod_list')
                         ->label('')
@@ -199,7 +263,35 @@ class ConanModsPage extends Page
                 ])
                 ->columnSpanFull(),
 
+
+            Section::make('Orphan paks (on disk, not in load order)')
+                ->description('These .pak files are under Mods/ but not in the load order (server will not load them). New saves auto-delete paks removed from the list; use this button for leftovers from older plugin versions.')
+                ->visible(fn (): bool => $this->orphanPaks !== [])
+                ->schema([
+                    Textarea::make('orphanPaksList')
+                        ->label('Orphan files')
+                        ->formatStateUsing(fn () => implode("\n", $this->orphanPaks))
+                        ->rows(4)
+                        ->disabled()
+                        ->dehydrated(false)
+                        ->columnSpanFull(),
+                ])
+                ->footerActions([
+                    Action::make('purgeOrphans')
+                        ->label('Delete orphan paks from disk')
+                        ->color('danger')
+                        ->icon('heroicon-o-trash')
+                        ->disabled(fn (): bool => ! $this->isSafeToEdit || $this->orphanPaks === [])
+                        ->requiresConfirmation()
+                        ->modalHeading('Delete orphan .pak files?')
+                        ->modalDescription('Permanently deletes .pak files under Mods/ that are not in the current load order. ExtractedMods caches are left alone.')
+                        ->action(fn () => $this->purgeOrphanPaks()),
+                ]),
+
             Section::make('Add mod')
+                ->description(fn (): string => $this->isSafeToEdit
+                    ? 'Server is offline: Add & save writes the load order immediately and queues any missing .pak downloads.'
+                    : 'Server is running: Add only updates the in-memory list. Stop the server, then Save load order.')
                 ->schema([
                     TextInput::make('addIdInput')
                         ->label('Workshop ID or URL')
@@ -209,7 +301,7 @@ class ConanModsPage extends Page
                 ])
                 ->footerActions([
                     Action::make('addMod')
-                        ->label('Add to list')
+                        ->label(fn (): string => $this->isSafeToEdit ? 'Add & save' : 'Add to list')
                         ->icon('heroicon-o-plus')
                         ->disabled(fn (): bool => ! $this->isSafeToEdit)
                         ->action(fn () => $this->addFromInput()),
@@ -225,7 +317,7 @@ class ConanModsPage extends Page
                 ])
                 ->footerActions([
                     Action::make('applyBulk')
-                        ->label('Replace list from bulk import')
+                        ->label(fn (): string => $this->isSafeToEdit ? 'Replace list & save' : 'Replace list (then Save)')
                         ->color('warning')
                         ->disabled(fn (): bool => ! $this->isSafeToEdit)
                         ->requiresConfirmation()
@@ -234,7 +326,7 @@ class ConanModsPage extends Page
 
 
             Section::make('Workshop download / install')
-                ->description('Queues a host worker job: SteamCMD download → stage .pak into Mods/ → atomic modlist.txt. Server should be stopped first. Progress and completion refresh automatically every few seconds.')
+                ->description('Default: with the server stopped, Save auto-queues SteamCMD downloads for missing paks. Additional mods enqueue behind any active job (FIFO). Worker stages .pak into Mods/ and writes modlist.txt. Never download while the server is running.')
                 ->schema([
                     TextInput::make('installStatus')
                         ->label('Install job status')
@@ -242,35 +334,49 @@ class ConanModsPage extends Page
                         ->disabled()
                         ->dehydrated(false),
                     TextInput::make('installJobId')
-                        ->label('Job id')
+                        ->label('Active / preferred job')
                         ->formatStateUsing(fn () => $this->installJobId ?? '—')
                         ->disabled()
                         ->dehydrated(false),
+                    TextInput::make('installQueueDepth')
+                        ->label('Queue depth')
+                        ->formatStateUsing(fn () => (string) $this->installQueueDepth)
+                        ->disabled()
+                        ->dehydrated(false),
+                    TextInput::make('installPendingCount')
+                        ->label('Pending jobs')
+                        ->formatStateUsing(fn () => (string) $this->installPendingCount)
+                        ->disabled()
+                        ->dehydrated(false),
                     Textarea::make('installMessage')
-                        ->label('Progress')
-                        ->formatStateUsing(fn () => $this->installMessage !== '' ? $this->installMessage : 'No install job yet.')
-                        ->rows(3)
+                        ->label('Progress / queue')
+                        ->formatStateUsing(fn () => $this->formatInstallProgressDisplay())
+                        ->rows(4)
                         ->disabled()
                         ->dehydrated(false)
                         ->columnSpanFull(),
                 ])
                 ->footerActions([
                     Action::make('downloadInstall')
-                        ->label('Download Workshop paks')
+                        ->label(fn (): string => $this->installInProgress || $this->installQueueDepth > 0
+                            ? 'Queue missing paks'
+                            : 'Download missing paks now')
                         ->icon('heroicon-o-arrow-down-tray')
-                        ->color('warning')
+                        ->color('primary')
                         ->disabled(fn (): bool => ! $this->canStartInstall())
                         ->requiresConfirmation()
-                        ->modalHeading('Download and install Workshop paks?')
-                        ->modalDescription('SteamCMD will download each Workshop ID in the current load order into this server volume, copy .pak files into Mods/, write modlist.txt, and set ServerModList=modlist.txt. Stop the server first. Existing modlist.txt is backed up.')
-                        ->action(fn () => $this->startInstall()),
+                        ->modalHeading(fn (): string => $this->installInProgress || $this->installQueueDepth > 0
+                            ? 'Enqueue Workshop downloads?'
+                            : 'Download Workshop paks while server is stopped?')
+                        ->modalDescription('SteamCMD runs against the volume only — the game server must stay stopped. New IDs are merged into a pending job or queued behind the active job. Start the server only after the queue is empty and jobs succeed.')
+                        ->action(fn () => $this->startInstall(auto: false)),
                     Action::make('refreshInstall')
                         ->label('Refresh job status')
                         ->icon('heroicon-o-arrow-path')
                         ->color('gray')
                         ->action(function (): void {
                             $this->refreshInstallStatus(app(ConanWorkshopInstallService::class));
-                            if (in_array($this->installStatus, ['succeeded', 'failed', 'done'], true)) {
+                            if (in_array($this->installStatus, ['succeeded', 'failed', 'done'], true) && $this->installQueueDepth === 0) {
                                 $this->reloadFromServer();
                             }
                             $this->uncacheForm();
@@ -280,17 +386,22 @@ class ConanModsPage extends Page
                 ->columns(2),
 
             Section::make('modlist.txt (pak-level)')
-                ->description('Pak-level load list written by Download Workshop paks. ServerModList becomes modlist.txt after install; Workshop IDs stay in the plugin manifest for this UI.')
-                ->collapsed()
+                ->description('Pak-level load list (modlist.txt). Updates when you add/save mods. Pending Workshop IDs appear as comments until paks are downloaded. Status tags come from last boot log + ExtractedMods.')
+                ->collapsed(false)
                 ->schema([
                     Textarea::make('modlistPreview')
                         ->label('Current modlist.txt')
-                        ->formatStateUsing(fn () => $this->modlistEntries === []
-                            ? '(file missing or empty)'
-                            : collect($this->modlistEntries)->map(fn ($e) => $e['line'])->implode("\n"))
+                        ->rows(8)
+                        ->disabled()
+                        ->dehydrated(false)
+                        ->columnSpanFull(),
+                    Textarea::make('mountStatusSummary')
+                        ->label('Mount status (last boot + server extracts)')
+                        ->formatStateUsing(fn () => $this->formatMountStatusSummary())
                         ->rows(6)
                         ->disabled()
-                        ->dehydrated(false),
+                        ->dehydrated(false)
+                        ->columnSpanFull(),
                 ]),
         ];
     }
@@ -299,7 +410,7 @@ class ConanModsPage extends Page
     {
         return [
             Action::make('save')
-                ->label('Save load order')
+                ->label(fn (): string => $this->isDirty ? 'Save load order' : 'Saved')
                 ->icon('heroicon-o-check')
                 ->color('primary')
                 ->keyBindings(['mod+s'])
@@ -346,7 +457,8 @@ class ConanModsPage extends Page
 
     public function canSave(): bool
     {
-        return $this->isSafeToEdit;
+        // R2: only enable Save when there is something to write (dirty + offline).
+        return $this->isSafeToEdit && $this->isDirty;
     }
 
     public function move(int $index, int $delta): void
@@ -358,7 +470,7 @@ class ConanModsPage extends Page
         $ids = $this->workshopIds;
         [$ids[$index], $ids[$target]] = [$ids[$target], $ids[$index]];
         $this->workshopIds = array_values($ids);
-        $this->afterListMutation('Reordered');
+        $this->afterListMutation('Reordered', 'reorder');
     }
 
     public function removeAt(int $index): void
@@ -371,7 +483,7 @@ class ConanModsPage extends Page
         unset($ids[$index]);
         $this->workshopIds = array_values($ids);
         $title = $this->metaById[$removed]['title'] ?? $removed;
-        $this->afterListMutation('Removed: '.$title);
+        $this->afterListMutation('Removed: '.$title, 'remove');
     }
 
     public function addFromInput(): void
@@ -403,7 +515,7 @@ class ConanModsPage extends Page
         $this->metaById = array_replace($this->metaById, $meta);
         $this->addIdInput = '';
         $title = $meta[$id]['title'] ?? $id;
-        $this->afterListMutation('Added: '.$title);
+        $this->afterListMutation('Added: '.$title, 'add');
     }
 
     public function applyBulkImport(): void
@@ -420,10 +532,13 @@ class ConanModsPage extends Page
         $ids = app(ConanModListService::class)->normalizeIdList($parts);
         $this->workshopIds = $ids;
         $this->metaById = app(SteamWorkshopService::class)->getDetails($ids);
-        $this->afterListMutation('Bulk list set ('.count($ids).' mods)');
+        $this->afterListMutation('Bulk list set ('.count($ids).' mods)', 'bulk');
     }
 
-    public function saveList(): void
+    /**
+     * @param  string  $source  Context for notifications: add|remove|reorder|bulk|manual
+     */
+    public function saveList(string $source = 'manual'): void
     {
         $server = Filament::getTenant();
         $state = app(PelicanServerStateService::class);
@@ -446,20 +561,43 @@ class ConanModsPage extends Page
         }
 
         try {
+            $beforePaks = $modList->listPaks($server);
             $modList->saveWorkshopOrder($server, $this->workshopIds);
             $this->reloadFromServer();
+            $removed = array_values(array_diff($beforePaks, $this->paksOnDisk));
+            $body = 'Load order written to modlist.txt.';
+            if ($removed !== []) {
+                $body .= ' Deleted from disk: '.implode(', ', $removed).'.';
+            }
+            if ($this->orphanPaks !== []) {
+                $body .= ' Remaining orphans: '.implode(', ', $this->orphanPaks).'.';
+            }
+
+            $title = match ($source) {
+                'add' => 'Added and saved (server offline)',
+                'remove' => 'Removed and saved (server offline)',
+                'reorder' => 'Reordered and saved (server offline)',
+                'bulk' => 'Bulk list saved (server offline)',
+                default => 'Load order saved',
+            };
             Notification::make()
-                ->title('Load order saved to disk')
-                ->body('ServerModList='.(implode(',', $this->workshopIds) ?: '(empty)').'. Start the server after paks exist under Mods/.')
+                ->title($title)
+                ->body($body)
                 ->success()
                 ->send();
+
+            // Default: download missing paks while offline (before next start).
+            // Queues even if another job is already running (R1).
+            if (self::AUTO_DOWNLOAD_WHEN_OFFLINE && $this->isSafeToEdit && $this->idsNeedingPakDownload() !== []) {
+                $this->startInstall(auto: true);
+            }
         } catch (Throwable $e) {
             report($e);
             Notification::make()->title('Save failed')->body($e->getMessage())->danger()->send();
         }
     }
 
-    private function afterListMutation(string $summary): void
+    private function afterListMutation(string $summary, string $source = 'manual'): void
     {
         $this->isDirty = $this->workshopIds !== $this->savedWorkshopIds;
         $this->bulkImport = implode("\n", $this->workshopIds);
@@ -467,16 +605,25 @@ class ConanModsPage extends Page
         $this->fillFormState();
 
         if (self::AUTO_SAVE && $this->isSafeToEdit) {
-            $this->saveList();
+            // R2: auto-save path — toast titles make outcome explicit.
+            $this->saveList($source);
 
             return;
         }
 
+        // Online / no auto-save: list changed in memory only.
+        $body = $this->isSafeToEdit
+            ? 'Click Save load order to write ServerModList.'
+            : 'Server is running — stop it, then click Save load order. Refresh will discard unsaved list edits.';
+        if ($source === 'add') {
+            $body = $this->isSafeToEdit
+                ? 'Added — click Save load order to write to disk.'
+                : 'Added to list only — stop the server, then Save load order (Add & save when offline).';
+        }
+
         Notification::make()
             ->title($summary)
-            ->body($this->isSafeToEdit
-                ? 'Click Save load order to write ServerModList (or stop the server to enable auto-save).'
-                : 'Server is running — stop it, then Save load order. Refresh will discard unsaved list edits.')
+            ->body($body)
             ->info()
             ->send();
     }
@@ -484,13 +631,13 @@ class ConanModsPage extends Page
 
     public function canStartInstall(): bool
     {
+        // R1: allow queueing while a job is already in progress.
         return $this->isSafeToEdit
-            && ! $this->installInProgress
             && $this->workshopIds !== []
             && (bool) user()?->can(SubuserPermission::FileUpdate, Filament::getTenant());
     }
 
-    public function startInstall(): void
+    public function startInstall(bool $auto = false): void
     {
         $server = Filament::getTenant();
         $state = app(PelicanServerStateService::class);
@@ -505,7 +652,7 @@ class ConanModsPage extends Page
         if (! $state->isSafeToEdit($server)) {
             Notification::make()
                 ->title('Server must be stopped')
-                ->body('Stop the server before downloading/installing Workshop paks.')
+                ->body('Workshop paks are downloaded while the game is offline. Stop the server, then Save (auto-download) or use Download missing paks now.')
                 ->warning()
                 ->send();
 
@@ -517,26 +664,91 @@ class ConanModsPage extends Page
             return;
         }
 
+        // Always preserve full load order on disk. Auto path only *downloads* missing IDs;
+        // manual path re-downloads the full list (repair) but still keeps order.
+        $loadOrder = $this->workshopIds;
+        $downloadIds = $auto ? $this->idsNeedingPakDownload() : $this->workshopIds;
+        if ($downloadIds === []) {
+            if (! $auto) {
+                Notification::make()
+                    ->title('Nothing to download')
+                    ->body('Every Workshop ID in the load order already has a .pak on disk.')
+                    ->info()
+                    ->send();
+            }
+
+            return;
+        }
+
         try {
-            // Persist current ID order first so disk matches UI
-            app(ConanModListService::class)->saveWorkshopOrder($server, $this->workshopIds);
-            $queued = $installer->enqueue($server, $this->workshopIds);
-            $this->installJobId = $queued['job_id'];
-            $this->installStatus = 'pending';
-            $this->installInProgress = true;
-            $this->installMessage = 'Job queued. Waiting for conan-mod-worker…'
-                .($installer->workerSeemsAlive() ? '' : ' (worker heartbeat not seen yet — ensure the worker container is running)');
-            $this->uncacheForm();
-            $this->fillFormState();
+            // Persist current ID order first so disk matches UI (and survives worker merge).
+            app(ConanModListService::class)->saveWorkshopOrder($server, $loadOrder);
+            $queued = $installer->enqueue($server, $loadOrder, $downloadIds);
+            $this->refreshInstallStatus($installer);
+
+            $downloadCount = count($queued['download_ids'] ?? $downloadIds);
+            $orderCount = count($queued['load_order_ids'] ?? $queued['workshop_ids'] ?? $loadOrder);
+            $depth = (int) ($queued['queue_depth'] ?? $this->installQueueDepth);
+            $merged = (bool) ($queued['merged'] ?? false);
+            $already = (bool) ($queued['already_queued'] ?? false);
+
+            $title = match (true) {
+                $already => 'Already in download queue',
+                $merged => 'Merged into pending download job',
+                $depth > 1 => 'Workshop install enqueued',
+                $auto => 'Downloading paks before start',
+                default => 'Workshop install queued',
+            };
+
+            $bodyParts = [
+                'Job '.($queued['job_id'] ?? '?'),
+                $downloadCount.' download(s)',
+                $orderCount.' mod(s) in load order (preserved)',
+                'queue depth '.$depth,
+            ];
+            if ($auto) {
+                array_unshift($bodyParts, 'Server is stopped — SteamCMD will fetch missing paks without replacing other mods.');
+            }
+            if (! empty($queued['running_job_id']) && ($queued['job_id'] ?? '') !== $queued['running_job_id']) {
+                $bodyParts[] = 'waiting behind '.$queued['running_job_id'];
+            }
+            $bodyParts[] = 'Progress updates automatically; start the server only after the queue is empty and jobs succeed.';
+
             Notification::make()
-                ->title('Workshop install queued')
-                ->body('Job '.$queued['job_id'].'. Progress updates automatically; large packs can take many minutes.')
+                ->title($title)
+                ->body(implode(' ', array_map(static fn ($p) => rtrim((string) $p, '.').'.', $bodyParts)))
                 ->success()
                 ->send();
+            $this->uncacheForm();
+            $this->fillFormState();
         } catch (Throwable $e) {
             report($e);
             Notification::make()->title('Could not queue install')->body($e->getMessage())->danger()->send();
         }
+    }
+
+    /**
+     * Workshop IDs in the load order that do not yet have a mapped .pak on disk.
+     *
+     * @return list<string>
+     */
+    public function idsNeedingPakDownload(): array
+    {
+        $need = [];
+        $statusById = $this->mountStatusByWorkshopId();
+        $paks = array_fill_keys($this->paksOnDisk, true);
+
+        foreach ($this->workshopIds as $id) {
+            $row = $statusById[$id] ?? null;
+            $pak = is_array($row) ? ($row['pak_name'] ?? null) : null;
+            $onDisk = is_string($pak) && $pak !== '' && isset($paks[$pak]);
+            $status = is_array($row) ? (string) ($row['status'] ?? '') : 'missing_pak';
+            if (! $onDisk || $status === 'missing_pak') {
+                $need[] = $id;
+            }
+        }
+
+        return $need;
     }
 
     public function refreshInstallStatus(?ConanWorkshopInstallService $installer = null): void
@@ -544,12 +756,32 @@ class ConanModsPage extends Page
         $installer ??= app(ConanWorkshopInstallService::class);
         $server = Filament::getTenant();
         $uuid = (string) data_get($server, 'uuid');
+
+        $summary = $uuid !== ''
+            ? $installer->queueSummaryForServer($uuid)
+            : [
+                'queue_depth' => 0,
+                'pending_count' => 0,
+                'running_count' => 0,
+                'running_job_id' => null,
+                'pending_job_ids' => [],
+                'active_ids' => [],
+                'summary' => 'Queue empty',
+            ];
+        $this->installQueueDepth = (int) ($summary['queue_depth'] ?? 0);
+        $this->installPendingCount = (int) ($summary['pending_count'] ?? 0);
+        $this->installQueueSummary = (string) ($summary['summary'] ?? 'Queue empty');
+
         $job = null;
         if ($this->installJobId) {
-            $job = $installer->getJob($this->installJobId);
+            $tracked = $installer->getJob($this->installJobId);
+            // Keep tracking a known active job; otherwise fall through to preferred.
+            if (is_array($tracked) && in_array($tracked['bucket'] ?? '', ['pending', 'running'], true)) {
+                $job = $tracked;
+            }
         }
         if ($job === null && $uuid !== '') {
-            $job = $installer->latestJobForServer($uuid);
+            $job = $installer->preferredJobForServer($uuid);
         }
         if ($job === null) {
             $this->installJobId = null;
@@ -567,8 +799,12 @@ class ConanModsPage extends Page
         if ($status === 'done') {
             $status = 'succeeded';
         }
+        // Normalize bucket names to status
+        if (in_array($status, ['pending', 'running'], true) === false && in_array($job['bucket'] ?? '', ['pending', 'running'], true)) {
+            $status = (string) $job['bucket'];
+        }
         $this->installStatus = $status;
-        $this->installInProgress = in_array($status, ['pending', 'running'], true);
+        $this->installInProgress = in_array($status, ['pending', 'running'], true) || $this->installQueueDepth > 0;
 
         $progress = is_array($job['progress'] ?? null) ? $job['progress'] : [];
         $result = is_array($job['result'] ?? null) ? $job['result'] : [];
@@ -587,7 +823,112 @@ class ConanModsPage extends Page
                 $msg .= '…';
             }
         }
+        $idsInJob = $job['workshop_ids'] ?? [];
+        if (is_array($idsInJob) && $idsInJob !== []) {
+            $msg .= ' · job ids: '.implode(', ', array_slice(array_map('strval', $idsInJob), 0, 6));
+            if (count($idsInJob) > 6) {
+                $msg .= '…';
+            }
+        }
         $this->installMessage = $msg;
+    }
+
+    private function formatInstallProgressDisplay(): string
+    {
+        $parts = [];
+        if ($this->installQueueSummary !== '') {
+            $parts[] = $this->installQueueSummary;
+        }
+        if ($this->installMessage !== '') {
+            $parts[] = $this->installMessage;
+        }
+        if ($parts === []) {
+            return 'No install job yet. With the server stopped, Save auto-queues missing-pak downloads. Further adds enqueue behind the active job.';
+        }
+
+        return implode("\n", $parts);
+    }
+
+
+    public function purgeOrphanPaks(): void
+    {
+        $server = Filament::getTenant();
+        if (! (bool) user()?->can(SubuserPermission::FileUpdate, $server)) {
+            Notification::make()->title('Permission denied')->danger()->send();
+
+            return;
+        }
+        $this->refreshPowerState(app(PelicanServerStateService::class), $server);
+        if (! $this->isSafeToEdit) {
+            Notification::make()->title('Server must be stopped')->warning()->send();
+
+            return;
+        }
+        try {
+            $deleted = app(ConanModListService::class)->purgeOrphanPaks($server);
+            $this->reloadFromServer();
+            Notification::make()
+                ->title('Orphan paks deleted')
+                ->body($deleted === [] ? 'Nothing to delete.' : ('Deleted: '.implode(', ', $deleted)))
+                ->success()
+                ->send();
+        } catch (Throwable $e) {
+            report($e);
+            Notification::make()->title('Delete failed')->body($e->getMessage())->danger()->send();
+        }
+    }
+
+
+    private function formatPaksSummary(): string
+    {
+        if ($this->paksOnDisk === []) {
+            return '(none — use Download Workshop paks to install into Mods/)';
+        }
+        $managed = array_values(array_diff($this->paksOnDisk, $this->orphanPaks));
+        $parts = [];
+        if ($managed !== []) {
+            $parts[] = 'in load order: '.implode(', ', $managed);
+        }
+        if ($this->orphanPaks !== []) {
+            $parts[] = 'ORPHANS (not loaded): '.implode(', ', $this->orphanPaks);
+        }
+
+        return implode(' | ', $parts) ?: implode(', ', $this->paksOnDisk);
+    }
+
+    private function formatMountStatusSummary(): string
+    {
+        if ($this->mountStatus === []) {
+            return '(no mods in load order and no orphan paks)';
+        }
+        $lines = [];
+        foreach ($this->mountStatus as $row) {
+            $wid = $row['workshop_id'] ?? '—';
+            $pak = $row['pak_name'] ?? '(no pak)';
+            $status = $row['status'] ?? 'unknown';
+            $label = $row['label'] ?? '';
+            $lines[] = sprintf('[%s] id=%s  %s  — %s', $status, $wid, $pak, $label);
+        }
+        if ($this->mountedPaksFromLog !== []) {
+            $lines[] = '';
+            $lines[] = 'Log Mounting mod pak (last boot): '.implode(', ', $this->mountedPaksFromLog);
+        }
+
+        return implode("\n", $lines);
+    }
+
+    /** @return array<string, array<string, mixed>> keyed by workshop id */
+    public function mountStatusByWorkshopId(): array
+    {
+        $out = [];
+        foreach ($this->mountStatus as $row) {
+            $wid = $row['workshop_id'] ?? null;
+            if ($wid !== null && $wid !== '') {
+                $out[(string) $wid] = $row;
+            }
+        }
+
+        return $out;
     }
 
     private function uncacheForm(): void
@@ -604,11 +945,21 @@ class ConanModsPage extends Page
                 'serverModListMode' => $this->serverModListMode,
                 'serverModListRaw' => $this->serverModListRaw,
                 'settingsPath' => $this->settingsPath,
+                'configPlatform' => $this->configPlatform
+                    .($this->configPlatformSource !== '' ? ' ('.$this->configPlatformSource.')' : ''),
+                'paksSummary' => $this->formatPaksSummary(),
+                'orphanPaksList' => implode("\n", $this->orphanPaks),
+                'modlistPreview' => $this->modlistPreview !== ''
+                    ? $this->modlistPreview
+                    : '(file missing or empty — stop server, add Workshop IDs, Save to auto-download paks)',
+                'mountStatusSummary' => $this->formatMountStatusSummary(),
                 'addIdInput' => $this->addIdInput,
                 'bulkImport' => $this->bulkImport,
-                'installStatus' => $this->installStatus,
-                'installJobId' => $this->installJobId,
-                'installMessage' => $this->installMessage,
+                'installStatus' => $this->installStatus !== '' ? $this->installStatus : 'idle',
+                'installJobId' => $this->installJobId ?? '—',
+                'installQueueDepth' => (string) $this->installQueueDepth,
+                'installPendingCount' => (string) $this->installPendingCount,
+                'installMessage' => $this->formatInstallProgressDisplay(),
             ]);
         } catch (Throwable) {
             // Form may not be ready during early lifecycle.
@@ -660,30 +1011,52 @@ class ConanModsPage extends Page
         $prevMessage = $this->installMessage;
         $prevSafe = $this->isSafeToEdit;
         $prevLabel = $this->stateLabel;
+        $prevJobId = $this->installJobId;
+        $prevDepth = $this->installQueueDepth;
 
         $this->refreshPowerState(app(PelicanServerStateService::class), $server);
 
-        if ($this->installInProgress || in_array($this->installStatus, ['pending', 'running'], true) || $this->installJobId) {
+        if ($this->installInProgress || $this->installQueueDepth > 0 || in_array($this->installStatus, ['pending', 'running'], true) || $this->installJobId) {
             $this->refreshInstallStatus(app(ConanWorkshopInstallService::class));
         }
 
-        $installJustFinished = $prevInstall !== $this->installStatus
-            && in_array($this->installStatus, ['succeeded', 'failed', 'done'], true)
-            && $this->lastNotifiedInstallStatus !== $this->installStatus;
+        // Detect a tracked job reaching terminal state (including when queue advances to next job).
+        $jobFinished = $prevJobId
+            && $prevJobId !== ''
+            && $this->lastNotifiedInstallJobId !== $prevJobId
+            && (
+                // Same job now terminal
+                ($this->installJobId === $prevJobId && in_array($this->installStatus, ['succeeded', 'failed', 'done'], true) && $prevInstall !== $this->installStatus)
+                // Or job rotated away (finished and next preferred job is different / none)
+                || ($this->installJobId !== $prevJobId && in_array($prevInstall, ['pending', 'running'], true))
+            );
 
-        if ($installJustFinished) {
-            $this->lastNotifiedInstallStatus = $this->installStatus;
+        if ($jobFinished) {
+            $this->lastNotifiedInstallJobId = (string) $prevJobId;
+            $finishedJob = app(ConanWorkshopInstallService::class)->getJob((string) $prevJobId);
+            $finishedStatus = is_array($finishedJob)
+                ? (string) ($finishedJob['status'] ?? $finishedJob['bucket'] ?? 'unknown')
+                : $this->installStatus;
+            if ($finishedStatus === 'done') {
+                $finishedStatus = 'succeeded';
+            }
+
             $this->reloadFromServer();
-            if ($this->installStatus === 'succeeded') {
+            $this->refreshInstallStatus(app(ConanWorkshopInstallService::class));
+
+            if ($finishedStatus === 'succeeded' || $finishedStatus === 'done') {
+                $body = $this->installQueueDepth > 0
+                    ? 'Job '.$prevJobId.' complete. '.$this->installQueueDepth.' job(s) still in queue — downloads continue automatically.'
+                    : ($this->installMessage !== '' ? $this->installMessage : 'Paks and modlist.txt updated. Queue empty.');
                 Notification::make()
-                    ->title('Workshop install complete')
-                    ->body($this->installMessage !== '' ? $this->installMessage : 'Paks and modlist.txt updated.')
+                    ->title($this->installQueueDepth > 0 ? 'Workshop job complete (queue continues)' : 'Workshop install complete')
+                    ->body($body)
                     ->success()
                     ->send();
-            } elseif ($this->installStatus === 'failed') {
+            } elseif ($finishedStatus === 'failed') {
                 Notification::make()
                     ->title('Workshop install failed')
-                    ->body($this->installMessage !== '' ? $this->installMessage : 'See job log for details.')
+                    ->body(is_array($finishedJob) ? (string) ($finishedJob['error'] ?? $this->installMessage) : $this->installMessage)
                     ->danger()
                     ->send();
             }
@@ -713,10 +1086,12 @@ class ConanModsPage extends Page
             || $prevLabel !== $this->stateLabel
             || $prevInstall !== $this->installStatus
             || $prevMessage !== $this->installMessage
-            || $installJustFinished;
+            || $prevDepth !== $this->installQueueDepth
+            || $prevJobId !== $this->installJobId
+            || $jobFinished;
 
         // Always refresh form while install is active so progress text stays live
-        if ($changed || $this->installInProgress || $this->awaitingPowerSettle) {
+        if ($changed || $this->installInProgress || $this->awaitingPowerSettle || $this->installQueueDepth > 0) {
             $this->uncacheForm();
             $this->fillFormState();
         }
@@ -725,6 +1100,7 @@ class ConanModsPage extends Page
     public function shouldPollLiveState(): bool
     {
         return $this->installInProgress
+            || $this->installQueueDepth > 0
             || $this->awaitingPowerSettle
             || in_array($this->installStatus, ['pending', 'running'], true);
     }

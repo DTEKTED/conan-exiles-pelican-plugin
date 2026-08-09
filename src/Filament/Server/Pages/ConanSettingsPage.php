@@ -48,6 +48,10 @@ class ConanSettingsPage extends Page
     public string $stateMessage = '';
 
     #[Locked]
+    public string $configPlatform = 'LinuxServer';
+
+    public string $configPlatformSource = '';
+
     public string $settingsPath = '';
 
     #[Locked]
@@ -144,10 +148,14 @@ class ConanSettingsPage extends Page
         $this->serverPasswordValue = (string) ($variables->get($server, 'SRV_PW') ?? '');
         $this->savedServerPasswordValue = $this->serverPasswordValue;
 
+        $platform = app(\Dtektion\ConanSettingsEditor\Services\ConanConfigPlatformService::class)->resolve($server);
+        $this->configPlatform = (string) $platform['platform'];
+        $this->configPlatformSource = (string) $platform['source'];
+
         $this->settingsPath = $fileService->resolveExistingPath(
             $server,
-            $schema->pathFallbacks('ServerSettings.ini')
-        ) ?? (string) $schema->pathFor('ServerSettings.ini');
+            $schema->pathFallbacksForServer($server, 'ServerSettings.ini')
+        ) ?? $schema->pathForServer($server, 'ServerSettings.ini');
 
         $this->isSafeToEdit = $serverStateService->isSafeToEdit($server);
         $this->stateLabel = $serverStateService->getStateLabel($server);
@@ -190,6 +198,13 @@ class ConanSettingsPage extends Page
                 TextInput::make('_path')
                     ->label('Settings path')
                     ->formatStateUsing(fn () => $this->settingsPath)
+                    ->disabled()
+                    ->dehydrated(false),
+                TextInput::make('_platform')
+                    ->label('Config platform')
+                    ->formatStateUsing(fn () => $this->configPlatform
+                        .($this->configPlatformSource !== '' ? ' ('.$this->configPlatformSource.')' : '')
+                        .' · Linux primary; Windows supported')
                     ->disabled()
                     ->dehydrated(false),
                 TextInput::make('_mode')

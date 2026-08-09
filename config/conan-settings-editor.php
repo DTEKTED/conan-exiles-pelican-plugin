@@ -9,8 +9,13 @@ return [
 
     /*
     | Preferred platform directory under ConanSandbox/Saved/Config/
+    | auto        — detect from existing ServerSettings.ini + egg hints (default)
+    | LinuxServer — force Linux Dedicated paths
+    | WindowsServer — force Windows Dedicated paths
+    |
+    | Primary target for this project is Linux; Windows is supported for other users.
     */
-    'config_platform' => 'LinuxServer',
+    'config_platform' => 'auto',
 
     'config_platform_fallbacks' => [
         'LinuxServer',
