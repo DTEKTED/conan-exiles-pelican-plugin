@@ -40,7 +40,7 @@ This plugin does **not** replace Wings, the game egg, SteamCMD install of the ba
 
 ---
 
-## Install (humans)
+## Manual Installation Guide
 
 ### 1. Copy the plugin into the panel
 
@@ -174,15 +174,7 @@ Stop server
 
 ## AI usage disclosure
 
-This project has been developed with **AI-assisted tooling** (including large language model coding agents such as those used in interactive operator sessions). That includes help with implementation, refactors, debugging, and documentation drafts.
-
-Human operators remain responsible for:
-
-- Reviewing and accepting changes before they run on real servers
-- Testing stop/save/start and Workshop install paths on their own environment
-- Secrets handling, networking, and production risk decisions
-
-AI assistance does **not** change the license, does not imply endorsement by model vendors, and does not transfer responsibility for how you deploy the plugin.
+This project has been developed with **AI-assisted tooling** but I reviewed and approved every single line of code.
 
 If you fork or reuse this code, assume you should re-validate behavior against your Pelican/Wings/Conan versions.
 
