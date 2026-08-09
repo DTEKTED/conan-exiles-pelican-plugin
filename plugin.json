@@ -2,7 +2,7 @@
     "id": "conan-settings-editor",
     "name": "Conan Settings Editor",
     "author": "dtektion",
-    "version": "0.6.0",
+    "version": "0.6.1",
     "description": "Schema-driven Conan Exiles Enhanced settings and Workshop mod load order for Pelican. Supports Linux and Windows dedicated servers (LinuxServer / WindowsServer auto-detect). Stop-to-edit safety, backups, and optional SteamCMD install jobs.",
     "category": "plugin",
     "url": "https://github.com/DTEKTED/conan-exiles-pelican-plugin",
