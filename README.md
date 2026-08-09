@@ -20,9 +20,9 @@ It gives operators a browser UI to:
 
 ## Who this is for
 
-- You already run **Pelican Panel + Wings** with a **Conan Exiles Enhanced** egg/server.
+- You already run **Pelican Panel + Wings** with a **Conan Exiles Enhanced** egg/server on **Linux or Windows**.
 - You want settings and mods in the panel instead of hand-editing INI / SFTP-only workflows.
-- Optional: you can run a small **host worker** so Workshop downloads happen without Windows tools.
+- Optional: you can run a small **host worker** so Workshop downloads happen on the server (SteamCMD), without desktop managers.
 
 This plugin does **not** replace Wings, the game egg, SteamCMD install of the base game, or your tunnel/DNS setup (playit, Cloudflare, etc.).
 
@@ -36,24 +36,47 @@ This plugin does **not** replace Wings, the game egg, SteamCMD install of the ba
 | Wings node | Server volume reachable for file R/W |
 | Conan Enhanced egg | Plugin detects Conan servers only |
 | Permissions | Users need file **read** to open pages; **write** to save; power control to stop/start |
-| Optional worker | Docker (or host process) with access to Wings volumes + ability to run SteamCMD for app `440900` |
+| Optional worker | Linux: Docker/host SteamCMD · Windows: native SteamCMD · volumes for app `440900` |
 
 ---
 
-## Platform support (Linux primary)
+## Platform support (Linux and Windows)
 
-| Platform | Status |
-| --- | --- |
-| **Linux Dedicated** (`LinuxServer/`) | Primary — fully tested on Linux Wings |
-| **Windows Dedicated** (`WindowsServer/`) | Supported in-plugin (v0.6+): path auto-detect, mount/extract patterns, job `os_hint` |
+**Both Linux and Windows dedicated servers are supported** in a single plugin (not separate editions).
 
-One plugin for both targets (not separate Windows/Linux editions). Override:
+| Platform | Config path | Status |
+| --- | --- | --- |
+| **Linux Dedicated** | `ConanSandbox/Saved/Config/LinuxServer/` | Supported |
+| **Windows Dedicated** | `ConanSandbox/Saved/Config/WindowsServer/` | Supported (v0.6+) |
+
+### How platform is chosen
+
+1. **Auto (default):** look for an existing `ServerSettings.ini` under `LinuxServer` or `WindowsServer`, then egg/image hints.
+2. **Override** in plugin config:
 
 ```php
-'config_platform' => 'auto', // or LinuxServer | WindowsServer
+// config/conan-settings-editor.php (or panel config merge)
+'config_platform' => 'auto', // or 'LinuxServer' | 'WindowsServer'
 ```
 
-Windows Workshop worker: optional skeleton script for host operators; production path remains the Linux Docker worker. See lab docs `CONAN_MODS_OPTIONS.md` § R3.
+The active platform is shown on **Conan Settings** and **Conan Mods** (“Config platform”).
+
+### Workshop worker by host OS
+
+| Host running the worker | Script / approach |
+| --- | --- |
+| **Linux** | `mod-install-worker.sh` + `install-conan-workshop-mods.sh` (Docker SteamCMD) — production path on typical Linux Wings |
+| **Windows** | `scripts/mod-install-worker.ps1` skeleton + native `steamcmd.exe` — best-effort; complete the install/merge port for your paths |
+
+Panel job JSON includes `config_platform` and `os_hint` so workers can branch. Load-order **merge** rules are the same on both OS targets.
+
+### Docs
+
+| Doc | Contents |
+| --- | --- |
+| This README | Install, daily ops, safety, AI disclosure |
+| [`CREDITS.md`](./CREDITS.md) | Third-party credits |
+| Lab / operator notes (if you maintain them separately) | Runbook details: `CONAN_EXILES.md`, `CONAN_MODS_OPTIONS.md` § R3 (Windows roadmap phases) |
 
 ---
 
@@ -111,7 +134,7 @@ If the pages do not appear: confirm the egg/server is detected as Conan Enhanced
 3. Add Workshop IDs or full Workshop URLs.
    - While the server is stopped, **Add & save** writes the load order immediately.
 4. Prefer `ServerModList=modlist.txt` once paks exist (the plugin/worker set this when installing).
-5. Start the server so the engine can extract/mount LinuxServer content.
+5. Start the server so the engine can extract/mount platform content (`LinuxServer` or `WindowsServer`).
 
 **Load order = top first.** Clients should use the same mods in the same order for multiplayer.
 
